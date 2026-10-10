@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-10-10",
+  "audience": "Russian-speaking children and teenagers; individual placement with teacher",
+  "sources": [
+    {"url":"https://muslim.study/","observed":"Recorded and teacher-led formats, small lessons, tasks and feedback.","adaptation":"Short lesson, visual exercise, oral teacher check.","excluded":"Copied videos, claims about guaranteed results, prices and testimonials."},
+    {"url":"https://ru.quranacademy.org/courses/course/6-arabskiy-yazik-dlya-detey","observed":"Child course: video, writing practice, repetition, exercise, test.","adaptation":"Explain, compare, practise, test with hints and retry.","excluded":"Their exercises, lesson recordings and illustrations."},
+    {"url":"https://quran.com/en/product-updates/new-study-mode-on-quran-com","observed":"Verse-focused study, related resources and continuity.","adaptation":"Practice links to the existing ALLIM reader; no new Quran text database."},
+    {"url":"https://quran.com/en/product-updates/updated-word-by-word-recitation-feature","observed":"Word-by-word pronunciation.","adaptation":"Proposed follow-up: use existing reader audio with licensed source; no fabricated phoneme recordings."},
+    {"url":"https://www.madinah.ru/koran","observed":"Individual placement, teacher support, flexible timetable and support roles.","adaptation":"One concrete correction, retry, next step and parent guidance.","excluded":"Unverified teaching guarantees, a fictional staffed support service."},
+    {"url":"https://sibawayh.ru/","observed":"Distinct reading/tajwid, correction and memorization tracks; child programmes and entry prerequisites.","verification":"Primary-site search extract; direct browser navigation timed out.","adaptation":"Separate letters, reading and introductory tajwid; oral readiness before memorization.","excluded":"Advertised vocabulary totals, certification and time-to-completion promises."},
+    {"url":"https://al-isbaah.com/en/etudier-en-ligne/presentation","observed":"Student area with textbook, whiteboard, homework photos and teacher correction.","adaptation":"Keep materials, assignment and feedback together; teacher instruction sheets.","verification":"English official page; supplied Russian route could not be fetched."},
+    {"url":"https://al-isbaah.com/en/programmes/coran","observed":"Placement, recitation, correction, repetition and individual progress booklet.","adaptation":"Separate recognition, application and oral reading in teacher rubric.","excluded":"Their seven-level programme and ijazah claims."},
+    {"url":"https://tatarica.org/tat/razdely/obrazovanie/shheslr/maksudi-hmtadi-adi-nizametdin-uly","observed":"Muallim Awwal (1892) concerns Tatar literacy in Arabic script; Muallim Sani (1902) continues with Arabic literacy.","adaptation":"Progression from sign and letter to syllable and reading, with explicit modern ALLIM additions.","limitation":"Not a scholarly edition or a claim to reproduce the author's complete original sequence."}
+  ],
+  "principle": "All new lesson prose, questions and interface are original. Source-site media and paid lessons are not copied. Existing ALLIM alphabet draft is preserved. A qualified teacher must review Arabic examples and oral progression before publication."
+}

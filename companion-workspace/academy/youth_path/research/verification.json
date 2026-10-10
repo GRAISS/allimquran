@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-10",
+  "content": {
+    "courses": 3,
+    "chapters": 14,
+    "lessons": 43,
+    "questions": 61,
+    "seed_records": 164
+  },
+  "automated_tests": {
+    "passed": 4,
+    "checks": [
+      "question integrity",
+      "reference graph",
+      "teacher-edit/order protection",
+      "generated content consistency"
+    ]
+  },
+  "static_schema": "all declared fields exist in observed local LMS schemas",
+  "browser": {
+    "all_lessons_at_width_320": 43,
+    "other_widths": [
+      390,
+      768,
+      1280
+    ],
+    "overflow": false,
+    "wrong_answer_then_retry": "passed",
+    "progress_after_reload": "passed",
+    "teen_guidance": "passed",
+    "arabic_rtl": "passed",
+    "console_errors": 0
+  },
+  "not_verified": [
+    "agreed-manifest comparison",
+    "database installation and migration",
+    "native quiz submissions",
+    "production access and integrations",
+    "two-party live video"
+  ],
+  "status": "local review package, not deployed"
+}

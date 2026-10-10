@@ -1,0 +1,176 @@
+[
+  {
+    "sample": {
+      "width": 320,
+      "height": 700,
+      "lang": "ru",
+      "label": "В приложение"
+    },
+    "before": {
+      "dir": "ltr",
+      "exit": {
+        "bottom": 48.5,
+        "height": 44,
+        "left": 10,
+        "right": 176.1328125,
+        "top": 4.5,
+        "width": 166.1328125,
+        "x": 10,
+        "y": 4.5
+      },
+      "overflow": false,
+      "ref": "2:2"
+    },
+    "after": {
+      "focus": "open-quran-search",
+      "mushaf": false,
+      "navVisible": true,
+      "ref": "2:2"
+    }
+  },
+  {
+    "sample": {
+      "width": 390,
+      "height": 844,
+      "lang": "ru",
+      "label": "В приложение"
+    },
+    "before": {
+      "dir": "ltr",
+      "exit": {
+        "bottom": 48.5,
+        "height": 44,
+        "left": 10,
+        "right": 176.1328125,
+        "top": 4.5,
+        "width": 166.1328125,
+        "x": 10,
+        "y": 4.5
+      },
+      "overflow": false,
+      "ref": "2:2"
+    },
+    "after": {
+      "focus": "open-quran-search",
+      "mushaf": false,
+      "navVisible": true,
+      "ref": "2:2"
+    }
+  },
+  {
+    "sample": {
+      "width": 768,
+      "height": 1024,
+      "lang": "en",
+      "label": "Back to app"
+    },
+    "before": {
+      "dir": "ltr",
+      "exit": {
+        "bottom": 48.5,
+        "height": 44,
+        "left": 10,
+        "right": 153.0546875,
+        "top": 4.5,
+        "width": 143.0546875,
+        "x": 10,
+        "y": 4.5
+      },
+      "overflow": false,
+      "ref": "2:2"
+    },
+    "after": {
+      "focus": "open-quran-search",
+      "mushaf": false,
+      "navVisible": true,
+      "ref": "2:2"
+    }
+  },
+  {
+    "sample": {
+      "width": 1280,
+      "height": 900,
+      "lang": "en",
+      "label": "Back to app"
+    },
+    "before": {
+      "dir": "ltr",
+      "exit": {
+        "bottom": 48.5,
+        "height": 44,
+        "left": 10,
+        "right": 153.0546875,
+        "top": 4.5,
+        "width": 143.0546875,
+        "x": 10,
+        "y": 4.5
+      },
+      "overflow": false,
+      "ref": "2:2"
+    },
+    "after": {
+      "focus": "open-quran-search",
+      "mushaf": false,
+      "navVisible": true,
+      "ref": "2:2"
+    }
+  },
+  {
+    "sample": {
+      "width": 390,
+      "height": 844,
+      "lang": "ar",
+      "label": "العودة إلى التطبيق"
+    },
+    "before": {
+      "dir": "rtl",
+      "exit": {
+        "bottom": 48.5,
+        "height": 44,
+        "left": 209.4453125,
+        "right": 380,
+        "top": 4.5,
+        "width": 170.5546875,
+        "x": 209.4453125,
+        "y": 4.5
+      },
+      "overflow": false,
+      "ref": "2:2"
+    },
+    "after": {
+      "focus": "open-quran-search",
+      "mushaf": false,
+      "navVisible": true,
+      "ref": "2:2"
+    }
+  },
+  {
+    "sample": {
+      "width": 1280,
+      "height": 900,
+      "lang": "ar",
+      "label": "العودة إلى التطبيق"
+    },
+    "before": {
+      "dir": "rtl",
+      "exit": {
+        "bottom": 48.5,
+        "height": 44,
+        "left": 1099.4453125,
+        "right": 1270,
+        "top": 4.5,
+        "width": 170.5546875,
+        "x": 1099.4453125,
+        "y": 4.5
+      },
+      "overflow": false,
+      "ref": "2:2"
+    },
+    "after": {
+      "focus": "open-quran-search",
+      "mushaf": false,
+      "navVisible": true,
+      "ref": "2:2"
+    }
+  }
+]

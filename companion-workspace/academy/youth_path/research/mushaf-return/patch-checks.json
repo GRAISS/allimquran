@@ -1,0 +1,7 @@
+{
+  "public_snapshot_patch": "passed",
+  "public_idempotence": "passed",
+  "local_idempotence": "passed",
+  "unique_exit_button": true,
+  "database_migration": "not run: agreed commit manifest absent"
+}

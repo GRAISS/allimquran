@@ -1,0 +1,172 @@
+--- a/companion-workspace/index.html
++++ b/companion-workspace/index.html
+@@ -244,8 +244,8 @@
+             <article class="mushaf-panel">
+               <!-- ALLIM_MUSHAF_MOBILE_EXIT_V1_START -->
+               <nav class="mushaf-mobile-nav" aria-label="Навигация мусхафа" data-i18n-aria="mushafNavigation">
+-                <button class="mushaf-exit-button" id="mushaf-exit" type="button" aria-label="Вернуться к чтению" data-i18n-aria="mushafBack">
+-                  <svg aria-hidden="true"><use href="#i-arrow"/></svg><span data-i18n="mushafBack">Назад</span>
++                <button class="mushaf-exit-button" id="mushaf-exit" type="button" aria-label="В приложение" data-i18n-aria="mushafBack">
++                  <svg aria-hidden="true"><use href="#i-arrow"/></svg><span data-i18n="mushafBack">В приложение</span>
+                 </button>
+                 <a class="mushaf-home-button" href="https://allimquran.com/" data-home-link aria-label="На главную АЛЛИМ" data-i18n-aria="mushafHome">
+                   <svg aria-hidden="true"><use href="#i-home"/></svg><span class="sr-only" data-i18n="mushafHome">На главную АЛЛИМ</span>
+--- a/companion-workspace/styles.css
++++ b/companion-workspace/styles.css
+@@ -3021,70 +3021,53 @@
+ /* ALLIM_MUSHAF_HEADER_CENTER_V1_END */
+ 
+ /* ALLIM_MUSHAF_MOBILE_EXIT_V1_START */
+-body.mushaf-view .mushaf-toolbar {
+-  position: relative;
+-  z-index: 10;
+-}
+-
+ .mushaf-mobile-nav { display: none; }
+-
+-@media (max-width: 760px) {
+-  body.mushaf-view .mushaf-mobile-nav {
+-    position: fixed;
+-    z-index: 79;
+-    left: 10px;
+-    bottom: calc(10px + env(safe-area-inset-bottom));
+-    display: flex;
+-    align-items: center;
+-    gap: 6px;
+-  }
+-  body.mushaf-view .mushaf-exit-button,
+-  body.mushaf-view .mushaf-home-button {
+-    display: inline-flex;
+-    min-height: 54px;
+-    align-items: center;
+-    justify-content: center;
+-    border: 1px solid rgba(142,162,152,.72);
+-    border-radius: 18px;
+-    color: var(--forest);
+-    background: rgba(255,254,249,.96);
+-    box-shadow: 0 12px 34px rgba(17,52,45,.18),inset 0 1px 0 rgba(255,255,255,.9);
+-    backdrop-filter: blur(18px);
+-    -webkit-backdrop-filter: blur(18px);
+-  }
+-  body.mushaf-view .mushaf-exit-button {
+-    gap: 7px;
+-    padding: 0 14px 0 12px;
+-    cursor: pointer;
+-    font: 800 11px/1 var(--sans);
+-  }
+-  body.mushaf-view .mushaf-home-button {
+-    width: 54px;
+-    flex: 0 0 54px;
+-    color: var(--forest);
+-    text-decoration: none;
+-  }
+-  body.mushaf-view .mushaf-exit-button svg,
+-  body.mushaf-view .mushaf-home-button svg {
+-    width: 20px;
+-    height: 20px;
+-    fill: none;
+-    stroke: currentColor;
+-    stroke-width: 1.8;
+-  }
+-  body.mushaf-view .mushaf-exit-button svg { transform: rotate(180deg); }
+-  [dir="rtl"] body.mushaf-view .mushaf-exit-button {
+-    padding: 0 12px 0 14px;
+-  }
+-  [dir="rtl"] body.mushaf-view .mushaf-exit-button svg { transform: none; }
+-  body.mushaf-view .mushaf-exit-button:focus-visible,
+-  body.mushaf-view .mushaf-home-button:focus-visible {
+-    border-color: var(--gold);
+-    outline: 3px solid rgba(214,168,76,.24);
+-    outline-offset: 2px;
+-  }
+-  body.mushaf-view .mushaf-exit-button:active,
+-  body.mushaf-view .mushaf-home-button:active { transform: scale(.96); }
++body.mushaf-view { --mushaf-return-height: calc(54px + env(safe-area-inset-top)); }
++body.mushaf-view .mushaf-panel { padding-block-start: var(--mushaf-return-height); }
++body.mushaf-view .mushaf-toolbar { position: relative; z-index: 10; }
++body.mushaf-view .mushaf-mobile-nav {
++  position: fixed;
++  z-index: 79;
++  inset: 0 0 auto;
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 8px;
++  height: var(--mushaf-return-height);
++  padding: calc(5px + env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) 5px max(10px, env(safe-area-inset-left));
++  border-bottom: 1px solid var(--line);
++  background: var(--surface, #fffef9);
++}
++body.mushaf-view .mushaf-exit-button,
++body.mushaf-view .mushaf-home-button {
++  display: inline-flex;
++  min-height: 44px;
++  align-items: center;
++  justify-content: center;
++  gap: 7px;
++  padding: 0 14px;
++  border: 1px solid rgba(142,162,152,.72);
++  border-radius: 14px;
++  color: var(--forest);
++  background: #fffef9;
++  font: 800 12px/1.2 var(--sans);
++  cursor: pointer;
++  text-decoration: none;
++}
++body.mushaf-view .mushaf-home-button { width: 44px; flex: 0 0 44px; padding: 0; }
++body.mushaf-view .mushaf-exit-button svg,
++body.mushaf-view .mushaf-home-button svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; }
++body.mushaf-view .mushaf-exit-button svg { transform: rotate(180deg); }
++[dir="rtl"] body.mushaf-view .mushaf-exit-button svg { transform: none; }
++body.mushaf-view .mushaf-exit-button:focus-visible,
++body.mushaf-view .mushaf-home-button:focus-visible { outline: 3px solid var(--forest); outline-offset: 2px; }
++body.mushaf-view .mushaf-exit-button:hover,
++body.mushaf-view .mushaf-home-button:hover { background: var(--mint-2, #edf6f1); }
++body.mushaf-view .ayah-wrap {
++  height: calc(100dvh - var(--mushaf-return-height) - var(--mushaf-command-height) - var(--mushaf-dock-height));
++}
++body.mushaf-view .mushaf-page {
++  width: min(820px, calc((100dvh - var(--mushaf-return-height) - var(--mushaf-command-height) - var(--mushaf-dock-height) - 8px) * .6667), calc(100vw - 8px));
+ }
+ /* ALLIM_MUSHAF_MOBILE_EXIT_V1_END */
+ 
+--- a/companion-workspace/app.js
++++ b/companion-workspace/app.js
+@@ -546,7 +546,7 @@
+   Object.assign(translations.ru, {
+     audioDemo: "Слушать выбранный аят в исполнении чтеца", recitationLibrary: "Библиотека чтецов", recitationSource: "Профессиональная поаятная запись · EveryAyah", chooseReciter: "Чтец", audioSeekLabel: "Позиция воспроизведения", repeatAyah: "Повтор", nextAyahShort: "Далее", audioOpenSource: "Открытое аудио:", audioLoading: "Загружаю запись аята…", audioUnavailable: "Запись этого аята недоступна. Выберите другого чтеца.", audioPlaying: "Чтение аята началось.", audioStopped: "Воспроизведение остановлено.", reciterChanged: "Выбран чтец: {name}.", repeatAudioOn: "Повтор аята включён.", repeatAudioOff: "Повтор аята выключен.",
+     interlinearMode: "Подстрочно", interlinearAria: "Показать подстрочный смысл", interlinearVerified: "Буквальный подстрочник", interlinearLimited: "Арабское слово, произношение и краткий смысл показаны вместе прямо в ALLIM.", interlinearIdle: "Нажмите «Подстрочно»", interlinearLoading: "Загружаю слова…", interlinearReady: "Русский подстрочник готов", interlinearEnglishReady: "Доступен английский глосс", interlinearPartial: "Часть русского слоя ещё проверяется", interlinearUnavailable: "Источник временно недоступен", interlinearOn: "Подстрочный смысл включён.", interlinearOff: "Подстрочный смысл скрыт.",
+-    modeMushaf: "Мусхаф", mushafMadinah: "Мединский мусхаф", mushafHafs: "Риваят Хафс ‘ан ‘Асим · шрифт Османа Таха", mushafModeOn: "Открыт режим мединского мусхафа.", mushafNavigation: "Навигация мусхафа", mushafBack: "Назад к чтению", mushafHome: "На главную АЛЛИМ",
++    modeMushaf: "Мусхаф", mushafMadinah: "Мединский мусхаф", mushafHafs: "Риваят Хафс ‘ан ‘Асим · шрифт Османа Таха", mushafModeOn: "Открыт режим мединского мусхафа.", mushafNavigation: "Навигация мусхафа", mushafBack: "В приложение", mushafHome: "На главную АЛЛИМ",
+     mushafPage: "Страница", previousMushafPage: "Предыдущая страница", nextMushafPage: "Следующая страница", mushafLoading: "Загружаю точную страницу мусхафа…", mushafLoadError: "Страница временно недоступна. Проверьте соединение и повторите.", mushafPageReady: "Открыта страница {page} из 604.", mushafFont: "Почерк", mushafFontAria: "Выберите почерк мусхафа", mushafClassic: "Мединский классический", mushafModern: "Мединский современный", mushafReadable: "Крупный усманийский", mushafFontChanged: "Почерк мусхафа изменён.",
+     recitationFlowTitle: "Как вы хотите читать?", recitationFlowText: "Один аят вручную или непрерывно по суре.", recitationFlowGroup: "Сценарий чтения", singleVerseFlow: "Один аят", singleVerseFlowText: "Переход вручную", continuousFlow: "Непрерывно", continuousFlowText: "Микрофон остаётся активным", singleFlowEnabled: "Включено чтение одного аята.", continuousFlowEnabled: "Включено непрерывное чтение: правильный аят сменится автоматически.", continuousNeedsBrowser: "Для непрерывного чтения нужен Live-режим браузера.",
+     offlineSurah: "Сура без интернета", offlineSurahText: "Загрузите все аяты выбранной суры в фоне.", downloadSurah: "Скачать суру", cancelDownload: "Отменить", audioDownloadProgress: "Загружено {done} из {total} аятов", audioDownloadReady: "Сура загружена и готова без интернета.", audioDownloadError: "Не удалось завершить загрузку. Уже полученные аяты сохранены.", audioDownloadUnavailable: "Офлайн-загрузка не поддерживается этим браузером."
+@@ -555,7 +555,7 @@
+   Object.assign(translations.en, {
+     audioDemo: "Listen to the selected verse by a reciter", recitationLibrary: "Reciter library", recitationSource: "Professional verse-by-verse recitation · EveryAyah", chooseReciter: "Reciter", audioSeekLabel: "Playback position", repeatAyah: "Repeat", nextAyahShort: "Next", audioOpenSource: "Open audio:", audioLoading: "Loading the verse recitation…", audioUnavailable: "This verse recording is unavailable. Choose another reciter.", audioPlaying: "Verse recitation started.", audioStopped: "Playback stopped.", reciterChanged: "Reciter selected: {name}.", repeatAudioOn: "Verse repeat is on.", repeatAudioOff: "Verse repeat is off.",
+     interlinearMode: "Interlinear", interlinearAria: "Show interlinear meaning", interlinearVerified: "Word-by-word meaning", interlinearLimited: "Arabic, transliteration and a concise word meaning stay together inside ALLIM.", interlinearIdle: "Select Interlinear", interlinearLoading: "Loading words…", interlinearReady: "Word meanings are ready", interlinearEnglishReady: "English gloss is ready", interlinearPartial: "Some meanings are still under review", interlinearUnavailable: "Source is temporarily unavailable", interlinearOn: "Interlinear meaning is on.", interlinearOff: "Interlinear meaning is hidden.",
+-    modeMushaf: "Mushaf", mushafMadinah: "Madinah Mushaf", mushafHafs: "Hafs ‘an ‘Asim · Uthman Taha script", mushafModeOn: "Madinah Mushaf mode opened.", mushafNavigation: "Mushaf navigation", mushafBack: "Back to reading", mushafHome: "Go to the ALLIM home page",
++    modeMushaf: "Mushaf", mushafMadinah: "Madinah Mushaf", mushafHafs: "Hafs ‘an ‘Asim · Uthman Taha script", mushafModeOn: "Madinah Mushaf mode opened.", mushafNavigation: "Mushaf navigation", mushafBack: "Back to app", mushafHome: "Go to the ALLIM home page",
+     mushafPage: "Page", previousMushafPage: "Previous page", nextMushafPage: "Next page", mushafLoading: "Loading the exact Mushaf page…", mushafLoadError: "This page is temporarily unavailable. Check your connection and try again.", mushafPageReady: "Page {page} of 604 opened.", mushafFont: "Script", mushafFontAria: "Choose the Mushaf script", mushafClassic: "Classic Madani", mushafModern: "Modern Madani", mushafReadable: "Large Uthmanic", mushafFontChanged: "The Mushaf script has changed.",
+     recitationFlowTitle: "How would you like to recite?", recitationFlowText: "One verse manually or continuously through the surah.", recitationFlowGroup: "Recitation flow", singleVerseFlow: "One verse", singleVerseFlowText: "Advance manually", continuousFlow: "Continuous", continuousFlowText: "Microphone stays active", singleFlowEnabled: "Single-verse recitation is on.", continuousFlowEnabled: "Continuous recitation is on: a correct verse advances automatically.", continuousNeedsBrowser: "Continuous recitation requires Browser Live mode.",
+     offlineSurah: "Surah offline", offlineSurahText: "Download every verse of the selected surah in the background.", downloadSurah: "Download surah", cancelDownload: "Cancel", audioDownloadProgress: "Downloaded {done} of {total} verses", audioDownloadReady: "The surah is downloaded and ready offline.", audioDownloadError: "The download could not finish. Completed verses were kept.", audioDownloadUnavailable: "Offline downloads are not supported by this browser."
+@@ -564,7 +564,7 @@
+   Object.assign(translations.ar, {
+     audioDemo: "الاستماع إلى الآية المختارة بصوت قارئ", recitationLibrary: "مكتبة القرّاء", recitationSource: "تلاوة احترافية آيةً آية · EveryAyah", chooseReciter: "القارئ", audioSeekLabel: "موضع التشغيل", repeatAyah: "تكرار", nextAyahShort: "التالي", audioOpenSource: "مصدر الصوت المفتوح:", audioLoading: "جارٍ تحميل تلاوة الآية…", audioUnavailable: "تسجيل هذه الآية غير متاح. اختر قارئًا آخر.", audioPlaying: "بدأت تلاوة الآية.", audioStopped: "توقف التشغيل.", reciterChanged: "اختير القارئ: {name}.", repeatAudioOn: "فُعّل تكرار الآية.", repeatAudioOff: "أُوقف تكرار الآية.",
+     interlinearMode: "بين السطور", interlinearAria: "إظهار المعنى تحت كل كلمة", interlinearVerified: "المعنى كلمةً كلمة", interlinearLimited: "تظهر الكلمة العربية ولفظها ومعناها المختصر معًا داخل ALLIM.", interlinearIdle: "اختر بين السطور", interlinearLoading: "جارٍ تحميل الكلمات…", interlinearReady: "المعاني جاهزة", interlinearEnglishReady: "الشرح الإنجليزي جاهز", interlinearPartial: "بعض المعاني قيد المراجعة", interlinearUnavailable: "المصدر غير متاح مؤقتًا", interlinearOn: "فُعّل المعنى بين السطور.", interlinearOff: "أُخفي المعنى بين السطور.",
+-    modeMushaf: "المصحف", mushafMadinah: "مصحف المدينة", mushafHafs: "رواية حفص عن عاصم · خط عثمان طه", mushafModeOn: "فُتح وضع مصحف المدينة.", mushafNavigation: "التنقل في المصحف", mushafBack: "العودة إلى القراءة", mushafHome: "الانتقال إلى صفحة أليم الرئيسية",
++    modeMushaf: "المصحف", mushafMadinah: "مصحف المدينة", mushafHafs: "رواية حفص عن عاصم · خط عثمان طه", mushafModeOn: "فُتح وضع مصحف المدينة.", mushafNavigation: "التنقل في المصحف", mushafBack: "العودة إلى التطبيق", mushafHome: "الانتقال إلى صفحة أليم الرئيسية",
+     mushafPage: "الصفحة", previousMushafPage: "الصفحة السابقة", nextMushafPage: "الصفحة التالية", mushafLoading: "جارٍ تحميل صفحة المصحف الدقيقة…", mushafLoadError: "الصفحة غير متاحة مؤقتًا. تحقق من الاتصال وأعد المحاولة.", mushafPageReady: "فُتحت الصفحة {page} من ٦٠٤.", mushafFont: "الرسم", mushafFontAria: "اختر رسم المصحف", mushafClassic: "المدني الكلاسيكي", mushafModern: "المدني الحديث", mushafReadable: "العثماني الكبير", mushafFontChanged: "تم تغيير رسم المصحف.",
+     recitationFlowTitle: "كيف تريد أن تقرأ؟", recitationFlowText: "آية واحدة يدويًا أو تلاوة متصلة في السورة.", recitationFlowGroup: "مسار التلاوة", singleVerseFlow: "آية واحدة", singleVerseFlowText: "الانتقال يدوي", continuousFlow: "متصلة", continuousFlowText: "يبقى الميكروفون فعالًا", singleFlowEnabled: "فُعّلت تلاوة آية واحدة.", continuousFlowEnabled: "فُعّلت التلاوة المتصلة: تُفتح الآية التالية تلقائيًا بعد صحة القراءة.", continuousNeedsBrowser: "تحتاج التلاوة المتصلة إلى وضع المتصفح المباشر.",
+     offlineSurah: "السورة دون اتصال", offlineSurahText: "نزّل جميع آيات السورة المختارة في الخلفية.", downloadSurah: "تنزيل السورة", cancelDownload: "إلغاء", audioDownloadProgress: "تم تنزيل {done} من {total} آية", audioDownloadReady: "نُزّلت السورة وأصبحت جاهزة دون اتصال.", audioDownloadError: "تعذر إكمال التنزيل. حُفظت الآيات التي اكتمل تنزيلها.", audioDownloadUnavailable: "التنزيل دون اتصال غير مدعوم في هذا المتصفح."
+@@ -4891,8 +4891,8 @@
+     setMeaningVisibility(state.showMeaning);
+     if (restoreFocus) {
+       window.requestAnimationFrame(function () {
+-        var mobileHome = document.querySelector(".mobile-brand");
+-        if (mobileHome) mobileHome.focus();
++        var readerControl = document.getElementById("open-quran-search");
++        if (readerControl) readerControl.focus();
+       });
+     }
+   }

@@ -1,0 +1,50 @@
+ALLIM: video lessons and live teaching — internal handoff, 2026-10-10
+
+Observed local LMS source revision: 0cd844e212e9818feacdbcdfd44677f7504dea28.
+This is an observed checkout, NOT the approved production manifest.
+
+Recorded video:
+LessonContent.vue renders native video files; the video preview control supports
+MP4/WebM/OGG. Current lesson authoring also supports embedded media.
+A video file is content, not a two-way classroom. No new teaching videos have
+been recorded or added to the youth course package.
+
+Live classes:
+lms/lms/doctype/lms_live_class/lms_live_class.json has exactly these provider
+options: Zoom and Google Meet. The controller creates/synchronizes calendar
+events and provider links. There is no self-hosted conferencing engine in this
+feature. Confirmed against official documentation:
+https://docs.frappe.io/learning/create-a-live-class
+https://docs.frappe.io/learning/setup-guide/your-first-steps-with-frappe-learning
+No production settings, accounts, credentials, calendars or calls were accessed.
+
+Recommended separate implementation for the requested experience:
+A private self-hosted Jitsi Meet instance embedded inside the ALLIM student area.
+The learner stays in ALLIM and joins from their lesson; no Zoom account/app.
+This still needs a separately hosted media service and ongoing operation; it
+is not already built into the LMS. Do not turn on a public meet.jit.si fallback.
+Official API supports own-domain external_api.js, iframe, mobile browsers, JWT:
+https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe/
+
+Implementation contract for Karim:
+1. Confirm hosting/domain and deploy authenticated conferencing with TLS and TURN.
+2. Keep integration in allimquran, not shared theme or third-party LMS source.
+3. Server validates authenticated student enrollment or assigned teacher, lesson
+   schedule and room scope on EVERY join. Use opaque room IDs, short-lived signed
+   room-specific tokens; signing secret remains server-side. Never trust a hidden
+   button or room URL as the access control.
+4. Teacher controls admission. No anonymous child entry. No directory of students.
+5. Recording off by default. Define permission and retention before enabling it.
+6. Classroom includes current lesson and reading practice; uploads remain private
+   attachments governed by course access. Do not claim shared whiteboard exists
+   until implemented and tested.
+7. Handle denied microphone/camera, reconnect, teacher absence, full/ended lesson;
+   no silent external provider fallback and no automatic device activation.
+8. Verify with two actual test accounts/devices: student + teacher audio/video,
+   iOS/Android, weak network, unrelated account denied, expired token denied,
+   direct conference URL rejected, room cannot be entered after removal.
+
+Deliverable status: analysis and integration contract only. No live classroom
+implemented, no service installed, no two-party video test. Requires the agreed
+manifest and infrastructure configuration; it must not delay review of course
+content or the independent Mushaf return fix.

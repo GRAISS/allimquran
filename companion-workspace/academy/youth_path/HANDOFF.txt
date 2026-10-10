@@ -1,0 +1,65 @@
+ALLIM: academy curriculum, Mushaf return and video-class review
+2026-10-10 — handoff to g-karim; no deployment performed
+
+Scope delivered:
+- 3 draft Russian courses / 14 chapters / 43 lessons / 61 native quiz questions.
+  Existing 25-lesson alphabet content is retained; 18 lessons are new.
+- Local interactive preview with age-specific prompts, hints, correction/retry,
+  keyboard-native controls, browser-only progress and resume.
+- Create-only seed in allimquran/youth_curriculum: dry-run by default, no automatic
+  publishing, no overwriting published/edited courses, collision checks for the
+  existing ALLIM-C01 draft and rollback on apply failure.
+- Independent return-to-app fix in allimquran/mushaf_return; source patch and
+  desktop/mobile RU/EN/AR evidence included under research/mushaf-return.
+- Source/adaptation matrix covering the six references supplied by the owner;
+  methodology notes distinguish Maksudi sources from modern original additions.
+- Video audit: recorded lesson video is supported; live-class providers in the
+  observed LMS are Zoom/Google Meet. Private self-hosted embedded conferencing
+  requires separate infrastructure/integration. It is a proposal, not built.
+
+Ownership and baseline:
+The owner explicitly requested this academy work and handoff; this supersedes
+the earlier pause on this ALLIM LMS task only. Shared apps and production are
+untouched. No deployment, upstream push, merge, new services or real user
+accounts. Fork branch preserves the existing known source commit
+5a5a9365f8e44dbdb0ea0d5012122649bbb22661; no assertion that it is the approved
+current production base. No main-base comparison or PR is performed because
+colleague-projects.json remains unavailable. Existing branches and PR1/PR2 are
+untouched. Please provide/confirm the manifest before preparing the merge PR.
+
+Review/install order:
+1. Confirm the manifest, actual main base and installed LMS schema. Port only the
+   named new files / scoped Mushaf patch from this package to that agreed base.
+2. Run the Mushaf patch dry-run on allimquran.localhost, then apply and verify
+   exit, retained verse, audio/recognition stop and RU/EN/AR mobile/desktop.
+3. Resolve any pre-existing ALLIM-C01 draft. Set an existing test instructor.
+   Run youth_curriculum.execute dry-run, then apply; repeat must report
+   existing=164/create=0. Keep courses unpublished for teacher review.
+4. Test native student access, quiz submission, progress, permissions and no
+   certificate/payment activation. Have a qualified teacher review Arabic
+   examples and reading prerequisites before publication.
+5. Open review PR against the agreed g-karim/allimquran:main base. Karim owns
+   review, merge and deployment. Verify the public course catalog after release.
+6. Treat own-hosted live classrooms as a separate implementation with an agreed
+   host/domain, server-authorized enrollment, room-scoped tokens and two-device
+   testing. Do not enable a public conference fallback or recording by default.
+
+Evidence completed:
+4 package checks passed; original alphabet content validation passed.
+Native field names match observed local LMS revision
+0cd844e212e9818feacdbcdfd44677f7504dea28 (not approved production SHA).
+Preview: all 43 lessons at 320px; 390/768/1280px checks; Arabic RTL; wrong answer,
+retry, reload persistence, age switch; no captured console errors.
+Mushaf evidence: 6 responsive/language scenarios and pure idempotency checks.
+
+Explicitly unverified:
+Agreed-base compatibility; database install/migration; native authenticated
+course, quiz and progress behavior; external integrations; live two-party video;
+production. Static preview is not the authenticated LMS and not published.
+
+File map:
+allimquran/youth_curriculum/{__init__.py,courses.json}
+allimquran/mushaf_return/{__init__.py,payload.json}
+companion-workspace/academy/youth_path/README.txt
+companion-workspace/academy/youth_path/research/{sources.json,video-review.txt,verification.json,browser-checks.json}
+companion-workspace/academy/youth_path/research/mushaf-return/
