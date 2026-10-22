@@ -1,0 +1,37 @@
+ALLIM Mushaf reading space and typography — 22 October 2026
+Follow-up to g-karim/allimquran issue #4.
+
+Problem and result
+The reported screen used several horizontal control rows plus independently positioned microphone, account-data and journal panels. The page width was capped by viewport height, and each Quran line was fitted to a different font size.
+
+This candidate uses one 55px navigation row, a side settings dialog and a reserved bottom row. The page can use up to 900px width and scroll naturally instead of shrinking to screen height. All words and ayah markers on a page share one fitted font size; missing page-font codes trigger a whole-page Unicode fallback instead of mixing glyph encodings. Adaptive text remains 28–52px, default 36px on phones. The existing page layout remains selectable. The font picker is disabled while adaptive mode uses its unified Unicode font.
+
+Size, appearance, verse selectors, audio and other secondary controls move into the side dialog. Existing account-data and journal panels move there too, retaining their original DOM nodes/listeners and restoring their original positions on exit. Account errors/locks reopen the dialog; the dialog is outside the application root so account protection does not make the recovery controls inert. The page keeps a visible return control, page navigation and search. The duplicate mobile microphone is suppressed only in Mushaf mode; the original microphone and its status remain in the reserved row.
+
+Scope and source boundaries
+No Quran corpus, pronunciation service, database, shared application, Blog or LMS change. No production write, installation, migration or deployment. Existing working copies and branches are preserved.
+
+canonical.patch is an incremental patch against the previous review candidate, commit 976fa92384b9e70e12b1423c2be98258239b8347. It is NOT a patch against the original main branch.
+public-candidate.patch is the same focused change against the public learn page's inline JS/CSS observed on 22 October. It removes the earlier storage-panel clearance workaround. Those rendered fields are diagnostic/reference material, NOT an approved source export or full Git/DB baseline. Target functions were compared before substitution; unrelated public-source behavior was preserved.
+companion.patch is the local standalone-preview delta, with cache version 94.
+Full candidate fields, companion files, provenance hashes, tests and screenshots are included. Do not apply both page patches or overwrite current source with the full candidate files. Reconcile the appropriate delta with the agreed app source first.
+
+Verification
+- Mobile/tablet/desktop/landscape adaptive layout: 320x568, 390x844, 430x932, 768x1024, 1280x900, 844x390. No document horizontal overflow; reading rectangle ends exactly where the bottom row begins. No account/journal overlays while settings are closed.
+- Dense page 3: desktop page width 900px and one 47px glyph size; mobile adaptive 36px, maximum 52px without horizontal overflow. Classic mobile page remains constrained by physical line width; choose adaptive for larger text.
+- Canonical candidate AR/RTL at 390x844: side dialog mirrors correctly; 55px top row, no bottom overlap, uniform 36px adaptive glyphs. RU and EN also checked.
+- The original data-panel structure and public CSS were reproduced with isolated test actions: backup-action handler and journal dialog remained usable; a simulated storage_error reopened settings. No live account backup or sync was exercised.
+- Exit and re-entry preserve selected verse 2:6 and focus return, restore account-panel placement and do not duplicate reader controls. Escape closes the settings dialog. Size 36 survives reload.
+- Regression tests preserve 288 word/marker strings and glyph round trips on fixture pages 1/2/3/604, saved preferences, storage denial, stale/failed page navigation and gesture guards.
+- Unit tests cover a common fit size, desktop width, adaptive isolation, control identity/restoration; offline-cache and existing reading-ledger tests passed. JavaScript syntax checks passed.
+
+Commands (Node, no new packages)
+node verification/reader.test.cjs
+node companion-workspace/tests/mushaf-layout.test.cjs
+node companion-workspace/tests/offline-cache.test.js
+node --check canonical/javascript.js
+node --check public-candidate/javascript.js
+
+Still required before implementation PR/release
+Obtain the agreed colleague-projects.json and source base; reconcile current source drift; verify installation/migration/idempotence on allimquran.localhost. Test real account lock/conflict/recovery, microphone/audio and authenticated page-recall flows in the agreed test environment. Physical iPhone/Safari, real account sync, modern page-font variant and production integrations are not verified by these local tests. Fixture page 11 was unavailable from the public API, so dense page 3 was used for the new layout checks.
+Review, merge and deployment remain with Karim. This review-artifact branch is not a mergeable implementation PR.
