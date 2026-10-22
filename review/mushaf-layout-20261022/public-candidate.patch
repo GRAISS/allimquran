@@ -248,7 +248,7 @@
      heartCurrentPageData = data;
 --- a/allimquran/website_content/pages/learn/css.css
 +++ b/allimquran/website_content/pages/learn/css.css
-@@ -3134,3 +3134,83 @@
+@@ -3134,3 +3134,85 @@
  
  
  #correction-gate.is-uncertain { color: #66716d; border-color: #c8cfcb; background: #f2f4f3; }
@@ -332,3 +332,5 @@
 +.mushaf-settings { border-radius: 0; }
 +body.mushaf-view .mushaf-settings #ayah-select { width: 100% !important; min-width: 0; }
 +body.mushaf-view .mushaf-settings #allim-storage-panel details > div { position: static; inset: auto; width: 100%; max-width: 100%; padding: 12px 0; border: 0; border-radius: 0; box-shadow: none; }
++body.mushaf-view .mushaf-page-loading { font: 500 15px/1.6 var(--sans); }
++body.mushaf-view .mushaf-page-loading strong { font-size: inherit; }
