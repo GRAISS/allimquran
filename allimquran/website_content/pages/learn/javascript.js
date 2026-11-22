@@ -6120,7 +6120,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     });
   }
 
-  function scheduleAutoAdvance(context) {
+  function scheduleAutoAdvance(context, continuation) {
     clearAutoAdvance();
     if ((!state.autoAdvance && state.recitationFlow !== "continuous") || !getNextVerseLocation()) {
       continuousResumePending = false;
@@ -6130,7 +6130,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     if (autoAdvanceContext === "read" && state.recitationFlow === "continuous" && continuousSessionActive) {
       autoAdvanceTimer = window.setTimeout(function () {
         clearAutoAdvance();
-        goToNextVerse();
+        goToNextVerse(undefined, continuation);
       }, 80);
       return true;
     }
@@ -6148,7 +6148,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     return true;
   }
 
-  function goToNextVerse(preserveMode) {
+  function goToNextVerse(preserveMode, continuation) {
     clearAutoAdvance();
     if (state.strictCorrection && correctionLocked) {
       playErrorCue();
@@ -6168,7 +6168,15 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     if (next.mushafVerse) {
       activateMushafVerse(next.mushafVerse, true);
       if (resumeAudio) audioAdvanceTimer = window.setTimeout(playVerseAudio, 120);
-      if (resumeContinuous) window.setTimeout(function () { startRecognition(true); }, 90);
+      var resumeRequestId = recognitionRequestId;
+      if (resumeContinuous) window.setTimeout(function () {
+        if (!continuousSessionActive || userStoppedRecognition || recognitionRequestId !== resumeRequestId || mushafSelectedVerseKey !== next.mushafVerse.verse_key) return;
+        if (continuation && continuation.verseKey === mushafSelectedVerseKey) {
+          var continued = applyTranscript(continuation.transcript, true);
+          if (continued && continued.complete) return;
+        }
+        startRecognition(true);
+      }, 90);
       return true;
     }
     if (next.mushafNextPage) {
@@ -8012,7 +8020,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     updateAiMentor("reading");
   }
 
-  function completeRecognizedVerse(alignment) {
+  function completeRecognizedVerse(alignment, continuation) {
     if (!alignment || !alignment.complete || !lastAlignmentFinal) return;
     continuousFailureCount = 0;
     var shouldCredit = !recognitionSessionCounted;
@@ -8080,7 +8088,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
       clearAutoAdvance();
       return;
     }
-    scheduleAutoAdvance("read");
+    scheduleAutoAdvance("read", continuation);
   }
 
   function applyTranscript(transcript, isFinal) {
@@ -8096,8 +8104,24 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
       {partial: true, stops: stops});
     if (!isFinal && readingCommittedAlignment) return readingCommittedAlignment;
     if (isFinal && lastTranscript) { readingSegments = segments; readingCommittedAlignment = alignment; }
+    var continuation = null;
+    if (isFinal && !alignment.complete && state.recitationFlow === "continuous" && continuousSessionActive) {
+      var next = getNextVerseLocation();
+      var nextVerse = next && next.mushafVerse;
+      if (nextVerse) {
+        var nextWords = (nextVerse.words || []).filter(function (word) { return word.char_type_name !== "end"; }).map(function (word) { return word.text_qpc_hafs || ""; }).filter(Boolean);
+        var split = window.AllimRecitation.splitContinuation(currentWords, segments.join(" "), nextWords);
+        if (split) {
+          alignment = split.alignment;
+          lastTranscript = split.transcript;
+          readingSegments = [split.transcript];
+          readingCommittedAlignment = alignment;
+          continuation = {verseKey: nextVerse.verse_key, transcript: split.remainder};
+        }
+      }
+    }
     renderRecognitionAlignment(alignment, isFinal);
-    if (isFinal && alignment.complete) completeRecognizedVerse(alignment);
+    if (isFinal && alignment.complete) completeRecognizedVerse(alignment, continuation);
     else if (isFinal && !alignment.complete && !activateCorrectionLock(alignment)) {
       if (alignment.outcome === "mismatch") playErrorCue();
       else setRecognitionStatus("readingPaused", "readingPausedSub", false);
