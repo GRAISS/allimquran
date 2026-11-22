@@ -15,7 +15,7 @@ const server=http.createServer((req,res)=>{
  const browser=await chromium.launch({channel:'chrome',headless:true});const results=[];
  try{
  for(const lang of ['ru','en','ar']){
- const context=await browser.newContext({viewport:{width:1440,height:1000}}),page=await context.newPage(),errors=[];
+ const context=await browser.newContext({hasTouch:true,viewport:{width:1440,height:1000}}),page=await context.newPage(),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
  await context.addInitScript(lang=>{
  localStorage.setItem('allim-system-intro-seen-v1','1');
@@ -49,19 +49,23 @@ const server=http.createServer((req,res)=>{
  const ids=['recitation-panel','allim-journal-summary','allim-storage-panel'];
  const boxes=ids.map(id=>{const r=document.getElementById(id).getBoundingClientRect();return{id,x:r.x,y:r.y,w:r.width,h:r.height};});
  return{boxes,overflow:document.documentElement.scrollWidth>innerWidth+1,next:document.getElementById('mushaf-next-page').getBoundingClientRect().x,prev:document.getElementById('mushaf-prev-page').getBoundingClientRect().x};});
- assert(!positions.overflow,lang+' '+width+' overflow');assert(positions.next<positions.prev,'next page must be left');
+ assert(!positions.overflow,lang+' '+width+' overflow');if(width>600) assert(positions.next<positions.prev,'next page must be left');
+ if(width<=600) assert.equal(await page.locator('#mushaf-next-page').evaluate(el=>getComputedStyle(el).clipPath),'inset(50%)');
  for(let i=0;i<positions.boxes.length;i++)for(let j=i+1;j<positions.boxes.length;j++){
  const a=positions.boxes[i],b=positions.boxes[j];assert(!(a.w&&a.h&&b.w&&b.h&&a.x<b.x+b.w-1&&a.x+a.w>b.x+1&&a.y<b.y+b.h-1&&a.y+a.h>b.y+1),JSON.stringify(positions));}
  results.push({lang,width,height,nonOverlapping:true});
  if(width===390||width===1440)await page.screenshot({path:path.join(root,'../'+lang+'-'+width+'.png')});
  }
  await page.setViewportSize({width:1440,height:1000});
+ assert.equal(await page.locator('#mushaf-next-page svg').evaluate(el=>getComputedStyle(el).transform),'none');
+ assert.equal(await page.locator('#mushaf-prev-page svg path').getAttribute('d'),'M5 12h14m-5-5 5 5-5 5');
  await page.locator('#mushaf-next-page').click();await page.waitForFunction(()=>document.getElementById('mushaf-page-number').value==='2');
  await page.keyboard.press('ArrowLeft');await page.waitForFunction(()=>document.getElementById('mushaf-page-number').value==='3');
  await page.keyboard.press('ArrowRight');await page.waitForFunction(()=>document.getElementById('mushaf-page-number').value==='2');
  await page.locator('#mushaf-prev-page').click();await page.waitForFunction(()=>document.getElementById('mushaf-page-number').value==='1');
  assert(await page.locator('#mushaf-prev-page').isDisabled());
  await page.locator('#mushaf-page').evaluate(node=>{
+  document.querySelector('[data-mushaf-layout="adaptive"]').click();
   node.dispatchEvent(new TouchEvent('touchstart',{touches:[new Touch({identifier:1,target:node,clientX:100,clientY:200})]}));
   node.dispatchEvent(new TouchEvent('touchend',{changedTouches:[new Touch({identifier:1,target:node,clientX:200,clientY:200})]}));
  });

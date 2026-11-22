@@ -6776,6 +6776,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
       showToast(t("correctionBlocked"));
       return false;
     }
+    clearAutoAdvance();
     var targetPage = Math.max(1, Math.min(604, mushafPageNumber + direction));
     if (targetPage === mushafPageNumber) return false;
     loadMushafPage(targetPage, true).then(function (loaded) {
@@ -9249,11 +9250,13 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     });
     var mushafPage = document.getElementById("mushaf-page");
     mushafPage.addEventListener("touchstart", function (event) {
-      if (event.touches.length !== 1 || (window.visualViewport && window.visualViewport.scale > 1.01) || getMushafReadingPreferences().layout === "adaptive") { mushafSwipeStart = null; return; }
-      mushafSwipeStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+      if (event.touches.length !== 1 || (window.visualViewport && window.visualViewport.scale > 1.01)) { mushafSwipeStart = null; return; }
+      if (event.target.closest("button, input, select, textarea, a") || document.querySelector("dialog[open]")) { mushafSwipeStart = null; return; }
+      mushafSwipeStart = { x: event.touches[0].clientX, y: event.touches[0].clientY, time: Date.now() };
     }, { passive: true });
     mushafPage.addEventListener("touchend", function (event) {
       if (!mushafSwipeStart || !event.changedTouches.length || event.touches.length || (window.visualViewport && window.visualViewport.scale > 1.01)) { mushafSwipeStart = null; return; }
+      if (Date.now() - mushafSwipeStart.time > 900 || (window.getSelection && !window.getSelection().isCollapsed)) { mushafSwipeStart = null; return; }
       var deltaX = event.changedTouches[0].clientX - mushafSwipeStart.x;
       var deltaY = event.changedTouches[0].clientY - mushafSwipeStart.y;
       mushafSwipeStart = null;
