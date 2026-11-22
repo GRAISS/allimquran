@@ -9668,10 +9668,11 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
         pauseMemoryRecognition();
         stopVerseAudio(false);
       },
-      saveReview: async function (key, add) {
-        await window.AllimStorage.mutate(add
+      stamp: function () { return window.AllimStorage.stamp(); },
+      saveReview: async function (key, add, stamp) {
+        await window.AllimStorage.mutateMany([add
           ? { kind: "review_item", id: key, action: "set", value: { position: -Date.now() } }
-          : { kind: "review_item", id: key, action: "delete" });
+          : { kind: "review_item", id: key, action: "delete" }], stamp);
         await personalBridge.refresh();
       }
     });

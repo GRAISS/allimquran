@@ -86,7 +86,7 @@
       opener = button;
       const mode = button.dataset.quietRecallOpen;
       const available = mode === "queue" ? bridge.queue().slice(0, 5) : bridge.passage();
-      session = { mode, available, keys: [], index: 0, totals: { cleanTotal: 0, assistedTotal: 0, againTotal: 0, skippedTotal: 0 } };
+      session = { mode, available, stamp: bridge.stamp(), keys: [], index: 0, totals: { cleanTotal: 0, assistedTotal: 0, againTotal: 0, skippedTotal: 0 } };
       const options = mode === "queue" ? [available.length] : [...new Set([1, 3, 5].map(count => Math.min(count, available.length)))];
       length.replaceChildren(...options.filter(Boolean).map(count => new Option(number(count), count)));
       length.value = String(options[Math.min(1, options.length - 1)]);
@@ -181,7 +181,7 @@
         setStatus("saving");
         renderCard();
         try {
-          await bridge.saveReview(key, shouldAdd);
+          await bridge.saveReview(key, shouldAdd, current.stamp);
         } catch (_) {
           if (session !== current || !dialog.open) return;
           current.busy = false;
