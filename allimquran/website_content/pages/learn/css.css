@@ -3268,3 +3268,16 @@ body.mushaf-view .quiet-recall-entry,
 @media (max-width: 480px) {
   .quiet-recall-actions > button { flex: 1 1 135px; }
 }
+
+/* Flexible controls retain readable labels at narrow widths and text zoom. */
+:is(.primary-button, .secondary-button, .tertiary-button) { min-height: 44px; height: auto; white-space: normal; text-align: center; justify-content: center; overflow-wrap: anywhere; }
+:is(.primary-button, .secondary-button, .tertiary-button) > span { min-width: 0; }
+:is(.primary-button, .secondary-button, .tertiary-button) svg { flex-shrink: 0; }
+.dialog-heading > :first-child { min-width: 0; overflow-wrap: anywhere; }
+.dialog-heading > .icon-button { flex-shrink: 0; }
+.quiet-recall-guide { margin: 0; padding-inline-start: 1.5em; display: grid; gap: 8px; line-height: 1.5; }
+.quiet-recall-guide li::marker { color: var(--forest-2); font-weight: 700; }
+.quiet-recall-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#quiet-recall-skip { grid-column: 1 / -1; justify-self: center; }
+#quiet-recall-summary dd { font-variant-numeric: tabular-nums; min-inline-size: 2ch; text-align: end; }
+@media (max-width: 400px) { .quiet-recall-actions { grid-template-columns: minmax(0, 1fr); } }
