@@ -45,3 +45,18 @@ Acceptance: anonymous and authenticated form submission; new internal alert; val
 - Full database migration, installed Desk actions, real mail delivery, scheduler execution and production behavior still require the agreed environment. No production request was edited, and no real lesson or notification was claimed to have occurred.
 
 Rollback requires the prior application source and the preserved legacy script state. Retain the new result/outbox data; do not drop tables or delete learner records. Pending jobs should be paused by the deployment operator before rollback.
+
+
+## Owner designation (22 November 2026)
+
+The product owner has selected himself as the interim coordinator for new trial requests and overdue follow-ups. Choose his existing ALLIM account in **ALLIM Trial Settings**; do not create another account or grant new roles. His account identifier belongs in the site's configuration, not this public repository.
+
+After migration, an operator may apply the same configuration reproducibly with the non-public setup command:
+
+```sh
+bench --site allimquran.localhost execute allimquran.trial_setup.configure --kwargs '{"coordinator":"OWNER_ACCOUNT_ID","response_hours":24,"assign_existing":true}'
+```
+
+Replace the placeholder with the owner's verified existing account. This sets the default for future requests and assigns only existing open requests that have no coordinator. It preserves other staff assignments, consent, schedules, learner binding and results. The default initial follow-up deadline is 24 hours after the request's creation, so old requests remain visibly overdue. No learner/teacher email is enabled by this command. Staff receive in-app alerts; email follows their configured notification preferences and the outgoing-mail setup.
+
+New requests and overdue work have distinct notification titles. The previously linked live request was assigned to the owner through the existing assignment UI on 22 November. The new default and scheduled overdue processing remain pending deployment of this PR; configuring the live defaults before the new settings exist is not claimed.

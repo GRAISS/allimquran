@@ -85,7 +85,7 @@ def on_update(doc):
     assigned = previous and doc.trial_coordinator != previous.trial_coordinator
     if changed or assigned:
         for user in recipients(doc):
-            enqueue_notice(doc, "Action", "Staff", user, doc.trial_coordinator or "unassigned")
+            enqueue_notice(doc, "New request" if not previous else "Action", "Staff", user, doc.trial_coordinator or "unassigned")
     if not previous:
         enqueue_notice(doc, "Received", "Learner", doc.email)
     elif changed and doc.status in ("Scheduled", "Completed", "Reschedule", "No Show", "Closed", "Enrolled"):
@@ -189,7 +189,7 @@ def tick():
                     enqueue_notice(doc, "Reminder", "Teacher", doc.trial_teacher, window)
             if overdue or not doc.trial_coordinator:
                 for user in recipients(doc):
-                    enqueue_notice(doc, "Action", "Staff", user, str(now.date()))
+                    enqueue_notice(doc, "Overdue" if overdue else "Action", "Staff", user, str(now.date()))
             frappe.db.commit()
         except Exception:
             frappe.db.rollback()
