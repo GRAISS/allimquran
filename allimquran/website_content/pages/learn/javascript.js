@@ -1339,7 +1339,7 @@
     mushafFont: "classic",
     mushafPaper: "ivory",
     mushafInk: "charcoal",
-    mushafLayout: window.innerWidth <= 620 ? "adaptive" : "page",
+    mushafLayout: "page",
     mushafTextSize: 36,
     recitationFlow: "continuous",
     recitationFlowExplicit: false,
@@ -2237,6 +2237,8 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
   var memoryLastTranscript = "";
   var memoryLastOutcome = "uncertain";
   var memoryFullVerseMatched = false;
+  var memoryConfirmedStatuses = [];
+  var memoryRequiresFullVerse = false;
   var autoAdvanceTimer = null;
   var autoAdvanceInterval = null;
   var autoAdvanceContext = null;
@@ -4109,7 +4111,8 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     activateMushafVerse(verse, true);
     renderMemoryVerse();
     navigate("memorize");
-    var stage = document.querySelector(".memory-stage");
+    var stage = document.getElementById("memory-reference");
+    document.getElementById("hifz-practice-panel").open = true;
     if (stage) stage.scrollIntoView({ behavior: "smooth", block: "start" });
     if (startNow) window.setTimeout(function () { startMemoryRecognition(false); }, 180);
     return true;
@@ -4180,17 +4183,23 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
   }
 
   function startActiveMemorizationStep() {
+    if (document.body.classList.contains("is-loading-verse") || !currentSurah || !currentVerse || Number(currentSurah.id) !== Number(state.selectedSurah) || Number(currentVerse.ayah) !== Number(state.selectedAyah)) {
+      showToast(t("verseLoading")); return;
+    }
     document.getElementById("hifz-practice-panel").open = true;
     cancelStructuredAdvance();
     if (window.ALLIMJourney && window.ALLIMJourney.isCheck(getVerseKey(currentSurah, currentVerse))) { startMemoryRecognition(false); return; }
     if (!isStructured33Method(state.memorizationMethod)) {
-      var stage = document.querySelector(".memory-stage");
+      var stage = document.getElementById("memory-reference");
       if (stage) stage.scrollIntoView({ behavior: "smooth", block: "start" });
       showToast(t("heartPracticeScroll"));
       startMemoryRecognition(false);
       return;
     }
-    loadHeartPageContextForCurrentVerse().then(startLinked33CurrentStep).catch(function () { showToast(t("heartPageLoadError")); });
+    var generation = memoryFlowGeneration, key = getVerseKey(currentSurah, currentVerse), method = state.memorizationMethod;
+    loadHeartPageContextForCurrentVerse().then(function (data) {
+      if (generation === memoryFlowGeneration && key === getVerseKey(currentSurah, currentVerse) && method === state.memorizationMethod) startLinked33CurrentStep(data);
+    }).catch(function () { showToast(t("heartPageLoadError")); });
   }
 
   function selectMemorizationMethod(method, announce) {
@@ -5439,6 +5448,8 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     memoryHadError = false;
     memoryLastTranscript = "";
     memoryFullVerseMatched = false;
+    memoryConfirmedStatuses = [];
+    memoryRequiresFullVerse = false;
     document.getElementById("memory-reference").textContent = currentSurah.names[state.language] + " · " + getVerseKey(currentSurah, currentVerse);
     document.getElementById("memory-prompt").textContent = prompt.join(" ");
     var answerBox = document.getElementById("memory-answer");
@@ -6454,6 +6465,8 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
   }
 
 /* ALLIM_MUSHAF_COMFORT_START */
+  var mushafPageZoom = 100;
+
   function getMushafReadingPreferences() {
     return {
       layout: state.mushafLayout,
@@ -6478,9 +6491,9 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     var down = document.getElementById("mushaf-size-down");
     var up = document.getElementById("mushaf-size-up");
     var value = document.getElementById("mushaf-size-value");
-    if (down) down.disabled = adaptive && preferences.size <= 28;
-    if (up) up.disabled = adaptive && preferences.size >= 52;
-    if (value) value.textContent = adaptive ? formatMetric(preferences.size) : "—";
+    if (down) down.disabled = adaptive ? preferences.size <= 28 : mushafPageZoom <= 100;
+    if (up) up.disabled = adaptive ? preferences.size >= 52 : mushafPageZoom >= 250;
+    if (value) value.textContent = adaptive ? formatMetric(preferences.size) : formatMetric(mushafPageZoom) + "%";
     return adaptive;
   }
 
@@ -6505,7 +6518,8 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
   function changeMushafReadingPreferences(layout, delta) {
     if (["page", "adaptive"].indexOf(layout) < 0) return;
     state.mushafLayout = layout;
-    state.mushafTextSize = Math.max(28, Math.min(52, state.mushafTextSize + delta));
+    if (layout === "page") mushafPageZoom = Math.max(100, Math.min(250, mushafPageZoom + delta * 5));
+    else state.mushafTextSize = Math.max(28, Math.min(52, state.mushafTextSize + delta));
     saveState();
     refreshMushafReadingLayout();
   }
@@ -6535,21 +6549,23 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     document.querySelectorAll("[data-mushaf-layout]").forEach(function (button) {
       button.addEventListener("click", function () { changeMushafReadingPreferences(button.getAttribute("data-mushaf-layout"), 0); });
     });
-    document.getElementById("mushaf-size-down").addEventListener("click", function () { changeMushafReadingPreferences("adaptive", -2); });
-    document.getElementById("mushaf-size-up").addEventListener("click", function () { changeMushafReadingPreferences("adaptive", 2); });
+    document.getElementById("mushaf-size-down").addEventListener("click", function () { changeMushafReadingPreferences(state.mushafLayout, -2); });
+    document.getElementById("mushaf-size-up").addEventListener("click", function () { changeMushafReadingPreferences(state.mushafLayout, 2); });
     applyMushafReadingLayout(document.getElementById("mushaf-page"));
     var dock = document.getElementById("mushaf-reading-dock");
-    var dockNodes = [document.getElementById("recitation-panel"), document.getElementById("mobile-recognition-toggle"),
-      document.getElementById("allim-journal-summary"), document.getElementById("allim-storage-panel")].filter(Boolean);
-    var homes = dockNodes.map(function (node) {
+    var readingSettings = document.querySelector(".mushaf-appearance-popover");
+    var dockNodes = [document.getElementById("recitation-panel"), document.getElementById("mobile-recognition-toggle")].filter(Boolean);
+    var settingsNodes = [document.getElementById("allim-journal-summary"), document.getElementById("allim-storage-panel"), document.getElementById("mushaf-reading-controls"), document.querySelector(".mushaf-home-button")]
+      .concat(Array.prototype.slice.call(document.querySelectorAll(".verse-pickers > label, .verse-pickers > small, .reader-tools > button"))).filter(Boolean);
+    var homes = dockNodes.concat(settingsNodes).map(function (node) {
       var marker = document.createComment("reading-control"); node.before(marker);
-      return {node: node, marker: marker};
+      return {node: node, marker: marker, target: dockNodes.indexOf(node) >= 0 ? dock : readingSettings};
     });
     function syncDock() {
       var active = document.body.classList.contains("mushaf-view");
       homes.forEach(function (home) {
-        if (active && home.node.parentNode !== dock) dock.appendChild(home.node);
-        else if (!active && home.node.parentNode === dock) home.marker.after(home.node);
+        if (active && home.node.parentNode !== home.target) home.target.appendChild(home.node);
+        else if (!active && home.node.parentNode === home.target) home.marker.after(home.node);
       });
       if (active) document.body.style.setProperty("--mushaf-dock-height", Math.ceil(dock.getBoundingClientRect().height + 12) + "px");
       else document.body.style.removeProperty("--mushaf-dock-height");
@@ -6577,18 +6593,18 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     }
     var viewportHeight = window.visualViewport && window.visualViewport.height ? window.visualViewport.height : window.innerHeight;
     var compactViewport = window.innerWidth <= 620;
-    var minimumSize = compactViewport ? 9 : 12;
-    var baseSize = compactViewport ? 28 : 39;
+    var minimumSize = 12;
+    var baseSize = 39;
     var lines = Array.prototype.slice.call(container.querySelectorAll(".mushaf-line"));
     lines.forEach(function (line) { line.style.setProperty("--mushaf-line-font-size", baseSize + "px"); });
     mushafFitFrame = window.requestAnimationFrame(function () {
       lines.forEach(function (line) {
-        var classicCompact = compactViewport && state.mushafFont === "classic";
+        var classicCompact = false;
         var available = Math.max(1, line.clientWidth - (classicCompact ? 18 : 4));
         var glyphWidth = Array.prototype.slice.call(line.children).reduce(function (total, glyph) {
           return total + Math.max(glyph.offsetWidth, glyph.scrollWidth);
         }, 0);
-        var safetyScale = state.mushafFont === "classic" ? (compactViewport ? 1.27 : 1.05) : 1.02;
+        var safetyScale = state.mushafFont === "classic" ? 1.05 : 1.02;
         var needed = Math.max(1, line.scrollWidth, (glyphWidth + 4) * safetyScale);
         if (needed > available) {
           line.style.setProperty("--mushaf-line-font-size", Math.max(minimumSize, Math.floor(baseSize * available / needed)) + "px");
@@ -6600,7 +6616,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
         var top = wrap.getBoundingClientRect().top;
         var bottom = Math.min(viewportHeight, dock.getBoundingClientRect().top);
         var scale = Math.min(1, Math.max(1, bottom - top - 16) / Math.max(990, container.scrollHeight), (wrap.clientWidth - 16) / 660);
-        container.style.zoom = String(scale);
+        container.style.zoom = String(scale * mushafPageZoom / 100);
         wrap.scrollTop = 0;
       }
       mushafFitFrame = null;
@@ -6661,6 +6677,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     data.verses.forEach(function (verse) {
       var words = Array.isArray(verse.words) ? verse.words : [];
       words.forEach(function (word, index) {
+        if (word.page_number && Number(word.page_number) !== Number(data.page)) return;
         var lineNumber = Number(word.line_number) || 1;
         if (!lines.has(lineNumber)) lines.set(lineNumber, { words: [], headers: [] });
         var line = lines.get(lineNumber);
@@ -6917,7 +6934,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
   function loadMushafForCurrentVerse() {
     if (!currentSurah || !currentVerse) return Promise.resolve(false);
     var requestId = ++mushafPageRequest;
-    return window.fetch("/api/mushaf/locate/" + currentSurah.id + "/" + currentVerse.ayah, { headers: { "X-Requested-With": "QuranCompanion" } }).then(function (response) {
+    return window.fetch("/api/mushaf/locate/" + currentSurah.id + "/" + currentVerse.ayah + "?mushaf=" + (state.mushafFont === "classic" ? 2 : 1), { headers: { "X-Requested-With": "QuranCompanion" } }).then(function (response) {
       if (!response.ok) throw new Error("mushaf-location-unavailable");
       return response.json();
     }).then(function (data) {
@@ -6951,21 +6968,25 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
       showToast(t("searchNoResults"));
       return Promise.resolve(false);
     }
+    var requestId = ++quranSearchRequest;
+    cancelStructuredAdvance();
+    memorySeriesActive = false;
+    stopMemoryRecognition(true);
     if (audioPractice) stopVerseAudio(false);
     if (opts.navigate !== false) navigate("read");
     state.selectedSurah = id;
     state.selectedAyah = ayah;
     populateVerseSelectors();
     if (localVerse && opts.forceRemote !== true) {
+      setVerseLoading(false);
       renderSelectedVerse(true);
       if (document.body.classList.contains("mushaf-view")) return loadMushafForCurrentVerse().then(function () { return true; });
       return Promise.resolve(true);
     }
-    var requestId = ++quranSearchRequest;
     setVerseLoading(true);
     showToast(t("verseLoading"));
     var mushafId = state.mushafFont === "classic" ? 2 : 1;
-    return window.fetch("/api/mushaf/locate/" + id + "/" + ayah, { headers: { "X-Requested-With": "QuranCompanion" } }).then(function (response) {
+    return window.fetch("/api/mushaf/locate/" + id + "/" + ayah + "?mushaf=" + mushafId, { headers: { "X-Requested-With": "QuranCompanion" } }).then(function (response) {
       if (!response.ok) throw new Error("quran-location-unavailable");
       return response.json();
     }).then(function (location) {
@@ -6995,6 +7016,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
         }
         var playNext = opts.audioAdvanceRequest === audioSourceRequest;
         activateMushafVerse(verseData, true);
+        renderMemoryVerse();
         state.selectedSurah = id;
         state.selectedAyah = ayah;
         populateVerseSelectors();
@@ -7353,7 +7375,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
       option.textContent = item.id + ". " + (names[state.language] || names.en);
       surahSelect.appendChild(option);
     });
-    var selectedChapter = usingCatalog ? mushafChapterNames[state.selectedSurah] : null;
+    var selectedChapter = mushafChapterNames[state.selectedSurah] || null;
     var selectedLocalSurah = getLocalSurahExact(state.selectedSurah);
     if (!selectedChapter && !selectedLocalSurah) {
       state.selectedSurah = usingCatalog ? chapters[0].id : corpus[0].id;
@@ -7367,6 +7389,10 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
       for (var ayahNumber = 1; ayahNumber <= Number(selectedChapter.verses_count); ayahNumber += 1) ayahNumbers.push(ayahNumber);
     } else if (selectedLocalSurah) {
       ayahNumbers = selectedLocalSurah.verses.map(function (verse) { return verse.ayah; });
+    }
+    if (currentSurah && currentVerse && Number(currentSurah.id) === Number(state.selectedSurah) && Number(currentVerse.ayah) === Number(state.selectedAyah) && ayahNumbers.indexOf(Number(state.selectedAyah)) < 0) {
+      ayahNumbers.push(Number(state.selectedAyah));
+      ayahNumbers.sort(function (a, b) { return a - b; });
     }
     if (ayahNumbers.indexOf(Number(state.selectedAyah)) < 0) state.selectedAyah = ayahNumbers[0] || 1;
     ayahNumbers.forEach(function (ayahNumber) {
@@ -7513,7 +7539,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
   }
 
   function alignExpectedWords(expectedWords, transcript, isFinal) {
-    return window.AllimRecitation.align(expectedWords, transcript, isFinal);
+    return window.AllimRecitation.align(expectedWords, transcript, isFinal, {partial: true, stops: isFinal ? [window.AllimRecitation.tokens(transcript).length - 1] : []});
   }
 
   function alignRecognizedWords(transcript, isFinal) {
@@ -8597,12 +8623,14 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     memoryHadError = false;
     memoryLastTranscript = "";
     memoryFullVerseMatched = false;
+    memoryConfirmedStatuses = [];
+    memoryRequiresFullVerse = false;
     document.getElementById("reveal-word").disabled = false;
     document.getElementById("memory-transcript-text").textContent = t("memoryWaiting");
     updateMemoryProgress();
   }
 
-  function queueMemoryRestart(delay, afterError) {
+  function queueMemoryRestart(delay, afterError, preserveAttempt) {
     clearMemoryRestartTimer();
     if (!memorySeriesActive) {
       setMemoryButton(false);
@@ -8615,7 +8643,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     memoryRestartTimer = window.setTimeout(function () {
       memoryRestartTimer = null;
       if (!memorySeriesActive) return;
-      prepareMemoryAttempt();
+      if (!preserveAttempt) prepareMemoryAttempt();
       startMemoryRecognition(true);
     }, Math.max(450, Number(delay) || 750));
     setMemoryButton(false);
@@ -8694,20 +8722,28 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
   function applyMemoryTranscript(transcript, isFinal) {
     var cleanTranscript = String(transcript || "").trim();
     if (!cleanTranscript) return null;
+    var expected = splitVerseWords(currentVerse.text);
+    var previous = memoryConfirmedStatuses.length === expected.length ? memoryConfirmedStatuses : expected.map(function () { return "pending"; });
+    var fullAlignment = window.AllimRecitation.alignCorrection(expected, cleanTranscript, previous, Boolean(isFinal), memoryRequiresFullVerse, true);
     if (window.ALLIMJourney && !memorySessionCounted) {
-      var journeyAlignment = alignExpectedWords(splitVerseWords(currentVerse.text), cleanTranscript, Boolean(isFinal));
-      window.ALLIMJourney.observe("memory", getVerseKey(currentSurah, currentVerse), journeyAlignment, isFinal);
+      window.ALLIMJourney.observe("memory", getVerseKey(currentSurah, currentVerse), fullAlignment, isFinal);
     }
     memoryLastTranscript = cleanTranscript;
     document.getElementById("memory-transcript-text").textContent = cleanTranscript;
-    var fullAlignment = alignExpectedWords(splitVerseWords(currentVerse.text), cleanTranscript, Boolean(isFinal));
-    if (isFinal && fullAlignment.complete) memoryFullVerseMatched = true;
+    if (isFinal) {
+      if (fullAlignment.complete) { memoryFullVerseMatched = true; memoryRequiresFullVerse = false; }
+      if (fullAlignment.extras > 0) memoryRequiresFullVerse = true;
+      else memoryConfirmedStatuses = fullAlignment.statuses.slice();
+    }
     var remainingWords = getRemainingMemoryWords();
     if (!remainingWords.length) return null;
     var alignment = alignExpectedWords(remainingWords, cleanTranscript, Boolean(isFinal));
+    var offset = memoryPromptCount + memoryRevealedCount;
+    if (!fullAlignment.extras && fullAlignment.statuses[offset] === "recognized") {
+      alignment = window.AllimRecitation.summarize(fullAlignment.statuses.slice(offset), 0, isFinal);
+    }
     memoryLastOutcome = alignment.outcome;
     if (!isFinal) return alignment;
-    if (fullAlignment.complete) alignment = window.AllimRecitation.summarize(remainingWords.map(function () { return "recognized"; }), 0, true);
     if (alignment.extras > 0) {
       setMemoryStatus("memoryWordRetry", "recognitionExtrasSub", true);
       return alignment;
@@ -8766,11 +8802,11 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
       setMemoryStatus("memoryUnsupported", "memoryUnsupportedSub", true);
       setMemorySeriesPhase("error", "memorySeriesTimeout", "memorySeriesTimeoutSub");
     } else if (errorCode === "no-speech") {
-      setMemoryStatus("memoryNoSpeech", "memoryNoSpeechSub", true);
-      queueMemoryRestart(850, true);
+      setMemoryStatus("memoryPaused", "memoryPausedSub", false);
+      queueMemoryRestart(850, "uncertain", true);
     } else {
       setMemoryStatus("memoryUnsupported", "memoryUnsupportedSub", true);
-      queueMemoryRestart(1050, true);
+      queueMemoryRestart(1050, true, true);
     }
     setMemoryButton(false);
   }
@@ -8818,7 +8854,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
       if (!memorySessionCounted && memorySeriesActive) {
         var needsCorrection = Boolean(document.querySelector(".memory-stage.has-memory-error")) || !memoryLastTranscript;
         if (!needsCorrection) setMemoryStatus("memoryPaused", "memoryPausedSub", false);
-        queueMemoryRestart(needsCorrection ? 900 : 520, memoryLastOutcome === "uncertain" ? "uncertain" : needsCorrection);
+        queueMemoryRestart(needsCorrection ? 900 : 520, memoryLastOutcome === "uncertain" ? "uncertain" : needsCorrection, true);
       }
     };
     return instance;
@@ -8852,14 +8888,14 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
         if (result.issue === "no-speech") handleMemoryRecognitionError("no-speech");
         else {
           setMemoryStatus("recognitionUncertain", "recognitionUncertainSub", false);
-          queueMemoryRestart(900, "uncertain");
+          queueMemoryRestart(900, "uncertain", true);
         }
         return;
       }
       applyMemoryTranscript(result.transcript, true);
       if (!memorySessionCounted && memorySeriesActive) {
         var needsCorrection = Boolean(document.querySelector(".memory-stage.has-memory-error"));
-        queueMemoryRestart(needsCorrection ? 900 : 620, memoryLastOutcome === "uncertain" ? "uncertain" : needsCorrection);
+        queueMemoryRestart(needsCorrection ? 900 : 620, memoryLastOutcome === "uncertain" ? "uncertain" : needsCorrection, true);
       }
     }).catch(function (error) {
       if (!memorySeriesActive || submitToken !== memoryRequestId) return;
@@ -8998,13 +9034,12 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     if (!checkMemoryRecognitionSupport()) return;
     if (!internalRestart) {
       memorySeriesActive = true;
-      if (memorySessionCounted || memoryRevealedCount > 0) prepareMemoryAttempt();
+      if (memorySessionCounted) prepareMemoryAttempt();
     }
     if (!memorySeriesActive) return;
     primeCueAudio();
     memoryHadError = false;
     memoryLastTranscript = "";
-    memoryFullVerseMatched = false;
     document.getElementById("memory-transcript-text").textContent = t("memoryWaiting");
     getMemoryWordElements().forEach(function (word) { word.classList.remove("is-incorrect"); });
     if (getEffectiveRecognitionMode() === "quran") {
@@ -9414,7 +9449,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     });
     var mushafPage = document.getElementById("mushaf-page");
     mushafPage.addEventListener("touchstart", function (event) {
-      if (event.touches.length !== 1 || (window.visualViewport && window.visualViewport.scale > 1.01)) { mushafSwipeStart = null; return; }
+      if (getMushafReadingPreferences().layout !== "page" || mushafPageZoom > 100 || event.touches.length !== 1 || (window.visualViewport && window.visualViewport.scale > 1.01)) { mushafSwipeStart = null; return; }
       if (event.target.closest("button, input, select, textarea, a") || document.querySelector("dialog[open]")) { mushafSwipeStart = null; return; }
       mushafSwipeStart = { x: event.touches[0].clientX, y: event.touches[0].clientY, time: Date.now() };
     }, { passive: true });

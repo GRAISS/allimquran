@@ -3331,3 +3331,38 @@ body.mushaf-view .ayah-wrap:has(.mushaf-page[data-reading-layout="page"]) { padd
 #hifz-settings-dialog .hifz-method-picker { display: grid; grid-template-columns: minmax(0,1fr); }
 #allim-recall summary { cursor: pointer; min-height: 44px; font-weight: 700; padding-block: 10px; }
 @media (min-width: 1100px) { #view-memorize.is-active .heart-mushaf { width: 100%; max-width: none; } }
+
+/* Page zoom preserves the printed line layout; scrolling is intentional above 100%. */
+body.mushaf-view .ayah-wrap { overflow-x: auto; }
+body.mushaf-view .mushaf-page[data-reading-layout="page"] { max-width: none; padding-inline: 12px; }
+.mushaf-size-choices output { min-width: 5ch; }
+.mushaf-reading-controls { flex-wrap: wrap; }
+
+#memory-reference { scroll-margin-top: 130px; }
+.memory-stage { padding: clamp(20px, 3vw, 36px); }
+.memory-prompt { margin-top: 18px; }
+.memory-session-count strong { font-family: var(--sans); }
+
+/* Keep the reading surface focused; secondary tools remain in the appearance menu. */
+body.mushaf-view .mushaf-panel { padding-block-start: 0; }
+body.mushaf-view .mushaf-mobile-nav { width: auto; inset-inline: 0 auto; border: 0; background: transparent; }
+body.mushaf-view .mushaf-toolbar { display: flex; justify-content: center; align-items: center; padding-inline: 175px 12px; min-height: 58px; gap: 8px; }
+body.mushaf-view .verse-pickers { display: flex; flex: 0 0 auto; width: auto; }
+body.mushaf-view .reader-tools { display: contents; }
+body.mushaf-view .mushaf-page-toolbar { display: flex; align-items: center; gap: 6px; width: auto; }
+body.mushaf-view .mushaf-appearance-popover { display: grid; gap: 12px; width: min(380px, calc(100vw - 24px)); max-height: calc(100dvh - 80px); overflow: auto; }
+body.mushaf-view .mushaf-appearance-popover > :is(label,button,small,.mushaf-reading-controls) { width: 100%; min-width: 0; }
+body.mushaf-view .mushaf-appearance-popover select { width: 100%; min-height: 44px; }
+body.mushaf-view .mushaf-appearance-popover .mushaf-reading-controls { padding: 8px 0; }
+body.mushaf-view .mushaf-appearance-popover :is(#allim-journal-summary,#allim-storage-panel) { position: static !important; width: 100%; max-width: none; box-shadow: none; }
+body.mushaf-view .mushaf-appearance-popover .mushaf-home-button { width: 44px; }
+body.mushaf-view #mushaf-reading-dock { justify-content: center; }
+body.mushaf-view #mushaf-reading-dock .recitation-panel { flex: 1 1 auto; width: min(100%, 760px); max-width: 760px; }
+@media (max-width: 620px) {
+ body.mushaf-view .mushaf-exit-button { width: 44px; padding: 0; }
+ body.mushaf-view .mushaf-exit-button span { display: none; }
+ body.mushaf-view .mushaf-toolbar { padding-inline: 62px 8px; gap: 6px; justify-content: flex-end; }
+ body.mushaf-view .mushaf-page-toolbar { gap: 4px; }
+ body.mushaf-view .mushaf-appearance-popover { inset: 60px 8px auto; width: auto; }
+}
+.mushaf-appearance-picker:not([open]) > .mushaf-appearance-popover { display: none; }
