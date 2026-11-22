@@ -1650,27 +1650,27 @@
   });
 
   Object.assign(translations.ru, {
-    openHeartPage: "Открыть страницу сердца", heartRepeats: "Повторения", heartPageEyebrow: "СТРАНИЦА В СЕРДЦЕ", heartPageTitle: "Соберите страницу целиком", heartAyatCollected: "Аятов собрано", heartPageBuilding: "Собирается", heartPageReady: "Готова к связному чтению", heartPagePermanent: "Сохранена навсегда", heartPageGuidance: "Каждый аят проявляется после 300 правильных чтений. Затем прочитайте всю страницу без разрыва, чтобы связать аяты.", heartConnectedTitle: "Связное чтение страницы", heartConnectedLocked: "Откроется, когда каждый аят достигнет 300 повторений.", heartConnectedReady: "Все аяты собраны. Прочитайте страницу по порядку без подсказок.", heartConnectedActive: "Читайте по порядку: следующий аят откроется автоматически.", heartConnectedPermanent: "Страница прочитана связно и больше не исчезнет.", heartContinueAyat: "Продолжить собирать аяты", heartStartConnected: "Начать связное чтение", heartOpenPermanent: "Открыть сохранённую страницу", heartPageLoading: "Загружаю состав страницы…", heartPageLoadError: "Не удалось загрузить состав страницы. Повторите ещё раз.", heartReadCredit: "Правильное чтение засчитано: {count} из 300.", heartLinkedStarted: "Связное чтение началось. Читайте страницу по порядку.", heartLinkedProgress: "Связано {done} из {total} аятов.", heartLinkedRestarted: "Порядок изменился. Связное чтение начато заново с этого аята.", heartPageSealed: "Страница собрана и сохранена навсегда.", heartPermanent: "Сохранён навсегда", heartVersePermanent: "Аят собран", heartVerseBuilding: "повторений"
+    openHeartPage: "Открыть страницу сердца", heartRepeats: "Повторения", heartPageEyebrow: "СТРАНИЦА В СЕРДЦЕ", heartPageTitle: "Соберите страницу целиком", heartAyatCollected: "Аятов собрано", heartPageBuilding: "Собирается", heartPageReady: "Готова к связному чтению", heartPagePermanent: "Достижение сохранено", heartPageGuidance: "Каждый аят проявляется после 300 правильных чтений. Затем прочитайте всю страницу без разрыва, чтобы связать аяты.", heartConnectedTitle: "Связное чтение страницы", heartConnectedLocked: "Откроется, когда каждый аят достигнет 300 повторений.", heartConnectedReady: "Все аяты собраны. Прочитайте страницу по порядку без подсказок.", heartConnectedActive: "Читайте по порядку: следующий аят откроется автоматически.", heartConnectedPermanent: "Страница собрана. Регулярное повторение поддерживает её проявленность.", heartContinueAyat: "Продолжить собирать аяты", heartStartConnected: "Начать связное чтение", heartOpenPermanent: "Открыть сохранённую страницу", heartPageLoading: "Загружаю состав страницы…", heartPageLoadError: "Не удалось загрузить состав страницы. Повторите ещё раз.", heartReadCredit: "Правильное чтение засчитано: {count} из 300.", heartLinkedStarted: "Связное чтение началось. Читайте страницу по порядку.", heartLinkedProgress: "Связано {done} из {total} аятов.", heartLinkedRestarted: "Порядок изменился. Связное чтение начато заново с этого аята.", heartPageSealed: "Страница собрана. Достижение и история сохранены.", heartPermanent: "Аят собран", heartVersePermanent: "Аят собран", heartVerseBuilding: "повторений"
   });
 
   Object.assign(translations.en, {
-    openHeartPage: "Open the page in your heart", heartRepeats: "Repetitions", heartPageEyebrow: "A PAGE IN THE HEART", heartPageTitle: "Build the whole page", heartAyatCollected: "Verses collected", heartPageBuilding: "In progress", heartPageReady: "Ready for connected recitation", heartPagePermanent: "Saved permanently", heartPageGuidance: "Each verse is revealed after 300 correct recitations. Then recite the whole page without a break to connect its verses.", heartConnectedTitle: "Connected page recitation", heartConnectedLocked: "Unlocks when every verse reaches 300 repetitions.", heartConnectedReady: "Every verse is collected. Recite the page in order without hints.", heartConnectedActive: "Recite in order: the next verse opens automatically.", heartConnectedPermanent: "The page was recited continuously and will never fade.", heartContinueAyat: "Continue collecting verses", heartStartConnected: "Start connected recitation", heartOpenPermanent: "Open saved page", heartPageLoading: "Loading the page structure…", heartPageLoadError: "The page structure could not be loaded. Please try again.", heartReadCredit: "Correct recitation counted: {count} of 300.", heartLinkedStarted: "Connected recitation started. Recite the page in order.", heartLinkedProgress: "Connected {done} of {total} verses.", heartLinkedRestarted: "The order changed. Connected recitation restarted from this verse.", heartPageSealed: "The page is complete and saved permanently.", heartPermanent: "Saved permanently", heartVersePermanent: "Verse collected", heartVerseBuilding: "repetitions"
+    openHeartPage: "Open the page in your heart", heartRepeats: "Repetitions", heartPageEyebrow: "A PAGE IN THE HEART", heartPageTitle: "Build the whole page", heartAyatCollected: "Verses collected", heartPageBuilding: "In progress", heartPageReady: "Ready for connected recitation", heartPagePermanent: "Achievement saved", heartPageGuidance: "Each verse is revealed after 300 correct recitations. Then recite the whole page without a break to connect its verses.", heartConnectedTitle: "Connected page recitation", heartConnectedLocked: "Unlocks when every verse reaches 300 repetitions.", heartConnectedReady: "Every verse is collected. Recite the page in order without hints.", heartConnectedActive: "Recite in order: the next verse opens automatically.", heartConnectedPermanent: "Page collected. Regular review maintains its visibility.", heartContinueAyat: "Continue collecting verses", heartStartConnected: "Start connected recitation", heartOpenPermanent: "Open saved page", heartPageLoading: "Loading the page structure…", heartPageLoadError: "The page structure could not be loaded. Please try again.", heartReadCredit: "Correct recitation counted: {count} of 300.", heartLinkedStarted: "Connected recitation started. Recite the page in order.", heartLinkedProgress: "Connected {done} of {total} verses.", heartLinkedRestarted: "The order changed. Connected recitation restarted from this verse.", heartPageSealed: "Page collected. Your achievement and history are saved.", heartPermanent: "Achievement saved", heartVersePermanent: "Verse collected", heartVerseBuilding: "repetitions"
   });
 
   Object.assign(translations.ar, {
-    openHeartPage: "افتح صفحة القلب", heartRepeats: "التكرار", heartPageEyebrow: "صَفْحَةٌ فِي القَلْب", heartPageTitle: "اجمع الصفحة كاملة", heartAyatCollected: "الآيات المكتملة", heartPageBuilding: "قيد الجمع", heartPageReady: "جاهزة للتلاوة المتصلة", heartPagePermanent: "محفوظة دائمًا", heartPageGuidance: "تظهر كل آية بعد ٣٠٠ تلاوة صحيحة، ثم تُقرأ الصفحة كاملة بلا انقطاع لربط آياتها.", heartConnectedTitle: "تلاوة الصفحة متصلة", heartConnectedLocked: "تُفتح بعد بلوغ كل آية ٣٠٠ تكرار.", heartConnectedReady: "اكتملت الآيات كلها. اقرأ الصفحة بالترتيب دون تلميح.", heartConnectedActive: "اقرأ بالترتيب، وستفتح الآية التالية تلقائيًا.", heartConnectedPermanent: "قُرئت الصفحة متصلة ولن تختفي بعد اليوم.", heartContinueAyat: "تابع جمع الآيات", heartStartConnected: "ابدأ التلاوة المتصلة", heartOpenPermanent: "افتح الصفحة المحفوظة", heartPageLoading: "جارٍ تحميل بنية الصفحة…", heartPageLoadError: "تعذر تحميل بنية الصفحة. حاول مرة أخرى.", heartReadCredit: "احتُسبت التلاوة الصحيحة: {count} من ٣٠٠.", heartLinkedStarted: "بدأت التلاوة المتصلة. اقرأ الصفحة بالترتيب.", heartLinkedProgress: "رُبطت {done} من {total} آية.", heartLinkedRestarted: "تغيّر الترتيب، فبدأت التلاوة المتصلة من هذه الآية.", heartPageSealed: "اكتملت الصفحة وحُفظت دائمًا.", heartPermanent: "محفوظة دائمًا", heartVersePermanent: "اكتملت الآية", heartVerseBuilding: "تكرار"
+    openHeartPage: "افتح صفحة القلب", heartRepeats: "التكرار", heartPageEyebrow: "صَفْحَةٌ فِي القَلْب", heartPageTitle: "اجمع الصفحة كاملة", heartAyatCollected: "الآيات المكتملة", heartPageBuilding: "قيد الجمع", heartPageReady: "جاهزة للتلاوة المتصلة", heartPagePermanent: "الإنجاز محفوظ", heartPageGuidance: "تظهر كل آية بعد ٣٠٠ تلاوة صحيحة، ثم تُقرأ الصفحة كاملة بلا انقطاع لربط آياتها.", heartConnectedTitle: "تلاوة الصفحة متصلة", heartConnectedLocked: "تُفتح بعد بلوغ كل آية ٣٠٠ تكرار.", heartConnectedReady: "اكتملت الآيات كلها. اقرأ الصفحة بالترتيب دون تلميح.", heartConnectedActive: "اقرأ بالترتيب، وستفتح الآية التالية تلقائيًا.", heartConnectedPermanent: "اكتملت الصفحة. تحافظ المراجعة المنتظمة على وضوحها.", heartContinueAyat: "تابع جمع الآيات", heartStartConnected: "ابدأ التلاوة المتصلة", heartOpenPermanent: "افتح الصفحة المحفوظة", heartPageLoading: "جارٍ تحميل بنية الصفحة…", heartPageLoadError: "تعذر تحميل بنية الصفحة. حاول مرة أخرى.", heartReadCredit: "احتُسبت التلاوة الصحيحة: {count} من ٣٠٠.", heartLinkedStarted: "بدأت التلاوة المتصلة. اقرأ الصفحة بالترتيب.", heartLinkedProgress: "رُبطت {done} من {total} آية.", heartLinkedRestarted: "تغيّر الترتيب، فبدأت التلاوة المتصلة من هذه الآية.", heartPageSealed: "اكتملت الصفحة وحُفظ إنجازك وسجلك.", heartPermanent: "الإنجاز محفوظ", heartVersePermanent: "اكتملت الآية", heartVerseBuilding: "تكرار"
   });
 
   Object.assign(translations.ru, {
-    heartContinueConnected: "Продолжить связное чтение", heartNextActions: "Следующие действия", heartNextStep: "СЛЕДУЮЩИЙ ШАГ", heartNextCollect: "Соберите оставшиеся аяты", heartNextConnect: "Свяжите всю страницу одним чтением", heartNextSaved: "Страница сохранена — её можно повторить", heartLinkedUnavailable: "Недоступно до завершения первого этапа", heartCollectProgress: "Текущий этап · собрано {collected} из {total}", heartLinkedLockedProgress: "Недоступно · собрано {collected} из {total}", heartLinkedReadyProgress: "Доступно · все {total} аятов собраны", heartLinkedActiveProgress: "Идёт чтение · связано {done} из {total}", heartLinkedSavedProgress: "Страница сохранена навсегда"
+    heartContinueConnected: "Продолжить связное чтение", heartNextActions: "Следующие действия", heartNextStep: "СЛЕДУЮЩИЙ ШАГ", heartNextCollect: "Соберите оставшиеся аяты", heartNextConnect: "Свяжите всю страницу одним чтением", heartNextSaved: "Страница сохранена — её можно повторить", heartLinkedUnavailable: "Недоступно до завершения первого этапа", heartCollectProgress: "Текущий этап · собрано {collected} из {total}", heartLinkedLockedProgress: "Недоступно · собрано {collected} из {total}", heartLinkedReadyProgress: "Доступно · все {total} аятов собраны", heartLinkedActiveProgress: "Идёт чтение · связано {done} из {total}", heartLinkedSavedProgress: "Страница собрана · продолжайте повторение"
   });
 
   Object.assign(translations.en, {
-    heartContinueConnected: "Continue connected recitation", heartNextActions: "Next actions", heartNextStep: "NEXT STEP", heartNextCollect: "Collect the remaining verses", heartNextConnect: "Connect the whole page in one recitation", heartNextSaved: "The page is saved — you can review it", heartLinkedUnavailable: "Unavailable until the first stage is complete", heartCollectProgress: "Current stage · {collected} of {total} collected", heartLinkedLockedProgress: "Unavailable · {collected} of {total} collected", heartLinkedReadyProgress: "Available · all {total} verses collected", heartLinkedActiveProgress: "In progress · {done} of {total} connected", heartLinkedSavedProgress: "Page saved permanently"
+    heartContinueConnected: "Continue connected recitation", heartNextActions: "Next actions", heartNextStep: "NEXT STEP", heartNextCollect: "Collect the remaining verses", heartNextConnect: "Connect the whole page in one recitation", heartNextSaved: "The page is saved — you can review it", heartLinkedUnavailable: "Unavailable until the first stage is complete", heartCollectProgress: "Current stage · {collected} of {total} collected", heartLinkedLockedProgress: "Unavailable · {collected} of {total} collected", heartLinkedReadyProgress: "Available · all {total} verses collected", heartLinkedActiveProgress: "In progress · {done} of {total} connected", heartLinkedSavedProgress: "Page collected · keep reviewing"
   });
 
   Object.assign(translations.ar, {
-    heartContinueConnected: "واصل التلاوة المتصلة", heartNextActions: "الإجراءات التالية", heartNextStep: "الخطوة التالية", heartNextCollect: "أكمل جمع الآيات المتبقية", heartNextConnect: "اربط الصفحة كاملة في تلاوة واحدة", heartNextSaved: "الصفحة محفوظة ويمكنك مراجعتها", heartLinkedUnavailable: "غير متاح حتى اكتمال المرحلة الأولى", heartCollectProgress: "المرحلة الحالية · جُمعت {collected} من {total}", heartLinkedLockedProgress: "غير متاح · جُمعت {collected} من {total}", heartLinkedReadyProgress: "متاح · جُمعت الآيات الـ {total} كلها", heartLinkedActiveProgress: "التلاوة جارية · رُبطت {done} من {total}", heartLinkedSavedProgress: "الصفحة محفوظة دائمًا"
+    heartContinueConnected: "واصل التلاوة المتصلة", heartNextActions: "الإجراءات التالية", heartNextStep: "الخطوة التالية", heartNextCollect: "أكمل جمع الآيات المتبقية", heartNextConnect: "اربط الصفحة كاملة في تلاوة واحدة", heartNextSaved: "الصفحة محفوظة ويمكنك مراجعتها", heartLinkedUnavailable: "غير متاح حتى اكتمال المرحلة الأولى", heartCollectProgress: "المرحلة الحالية · جُمعت {collected} من {total}", heartLinkedLockedProgress: "غير متاح · جُمعت {collected} من {total}", heartLinkedReadyProgress: "متاح · جُمعت الآيات الـ {total} كلها", heartLinkedActiveProgress: "التلاوة جارية · رُبطت {done} من {total}", heartLinkedSavedProgress: "الصفحة الإنجاز محفوظ"
   });
 
   Object.assign(translations.ru, {
@@ -2286,6 +2286,9 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     settings: "settingsTitle"
   };
 
+  Object.assign(translations.ru, {heartDailyReview: "Возвращайтесь каждый день", heartStrength: "Проявленность", heartNeedsReview: "Пора повторить · достижения сохранены"});
+  Object.assign(translations.en, {heartDailyReview: "Return every day", heartStrength: "Visibility", heartNeedsReview: "Time to review · achievements saved"});
+  Object.assign(translations.ar, {heartDailyReview: "تعاهد القرآن كل يوم", heartStrength: "وضوح النص", heartNeedsReview: "حان وقت المراجعة · إنجازاتك محفوظة"});
   var personalBridge = null;
   var quietRecall = null;
   var personalInitializing = true;
@@ -3761,25 +3764,21 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     return formatText("heartOverdueDays", { days: formatMetric(Math.abs(days)) });
   }
 
+  function getHeartFreshness(key, earned, target) {
+    var known = state.heartFreshness && state.heartFreshness.verses[key];
+    var unit = state.heartMushaf && state.heartMushaf.units && state.heartMushaf.units[key];
+    var last = known && known.at;
+    if (unit && unit.lastAcceptedAt && (!last || Date.parse(unit.lastAcceptedAt) > Date.parse(last))) last = unit.lastAcceptedAt;
+    return window.AllimHeartReview.freshness(earned, target, last);
+  }
+
   function getHeartPresentation(unit) {
     var total = getHeartFoundationTotal(unit);
-    var now = new Date();
-    var lastAccepted = unit.lastAcceptedAt ? new Date(unit.lastAcceptedAt) : null;
-    var inactiveDays = lastAccepted && Number.isFinite(lastAccepted.getTime()) ? heartDaysBetween(lastAccepted, now) : 0;
-    var dueDate = unit.nextReviewAt ? new Date(unit.nextReviewAt) : null;
-    var overdueDays = dueDate && Number.isFinite(dueDate.getTime()) ? Math.max(0, heartDaysBetween(dueDate, now)) : 0;
-    var reveal = Math.round(total / HEART_FOUNDATION_TOTAL * 100);
-    var statusKey = total ? "heartBuilding" : "heartNotStarted";
-    var dormant = total > 0 && total < HEART_FOUNDATION_TOTAL && inactiveDays >= 7;
-    var protectedPage = unit.permanent || total >= HEART_FOUNDATION_TOTAL;
-    if (protectedPage) {
-      unit.permanent = true;
-      reveal = 100;
-      dormant = false;
-      statusKey = "heartPermanent";
-    } else if (dormant || overdueDays > 0) statusKey = "heartNeedsReview";
-    if (!protectedPage && dormant) reveal = Math.max(12, Math.round(reveal * 0.45));
-    return { total: total, reveal: reveal, statusKey: statusKey, dormant: dormant, protectedPage: protectedPage, overdueDays: overdueDays };
+    var fresh = getHeartFreshness(getVerseKey(currentSurah, currentVerse), total, HEART_FOUNDATION_TOTAL);
+    return { total: total, reveal: Math.round(fresh.reveal * 100),
+      statusKey: fresh.due ? "heartNeedsReview" : total >= HEART_FOUNDATION_TOTAL ? "heartPermanent" : total ? "heartBuilding" : "heartNotStarted",
+      dormant: fresh.factor < 1, protectedPage: unit.permanent || total >= HEART_FOUNDATION_TOTAL,
+      overdueDays: fresh.days === null ? 0 : Math.max(0, fresh.days - 7), unknown: fresh.unknown };
   }
 
   function populateHeartSelectors() {
@@ -3882,7 +3881,8 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     var summary = pageData ? getStructuredPageSummary(pageData, method) : null;
     var pageUnit = summary ? summary.page : null;
     var verseCount = pageUnit ? Math.max(0, Number(pageUnit.verseCounts[key]) || 0) : 0;
-    var reveal = Math.round(verseCount / LINKED_33_TARGET * 100);
+    var fresh = getHeartFreshness(key, verseCount, LINKED_33_TARGET);
+    var reveal = Math.round(fresh.reveal * 100);
     var task = summary && summary.currentTask;
     var todayCount = getLinked33TodayCount(summary);
     document.getElementById("heart-ayah-reference").textContent = currentSurah.names[state.language] + " · " + key;
@@ -3892,12 +3892,13 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     var taskStage = turkish ? (task && task.type === "segment" ? 3 : (task && task.role === "gap" ? 2 : 1)) : (task && task.type === "segment" ? (task.isPage ? 3 : 2) : 1);
     document.getElementById("heart-current-stage").textContent = formatMetric(summary && summary.complete ? 3 : taskStage) + " / " + formatMetric(3);
     document.getElementById("heart-next-review").textContent = summary ? getStructuredTaskText(summary, method) : t(turkish ? "heartPagePendingTurkish" : "heartPagePending33");
-    document.getElementById("heart-strength").textContent = formatMetric(summary ? summary.percent : 0) + "%";
+    document.getElementById("heart-strength").textContent = formatMetric(reveal) + "%";
     var status = document.getElementById("heart-status");
     if (status) {
       status.textContent = summary ? getStructuredTaskText(summary, method) : t("heartPageLoading");
       status.classList.toggle("is-protected", Boolean(summary && summary.complete));
-      status.classList.remove("is-due");
+      status.classList.toggle("is-due", fresh.due);
+      if (fresh.due) status.textContent = t("heartNeedsReview");
     }
     var memoryCount = document.getElementById("memory-heart-count");
     var memoryProgress = document.getElementById("memory-heart-progress-bar");
@@ -3936,7 +3937,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     var startButton = document.getElementById("heart-start-practice");
     if (startButton) startButton.disabled = Boolean(summary && summary.complete);
     book.style.setProperty("--heart-reveal", reveal + "%");
-    book.classList.remove("is-dormant");
+    book.classList.toggle("is-dormant", fresh.factor < 1);
     book.classList.toggle("is-complete", verseCount >= LINKED_33_TARGET);
     if (summary) renderHeartPageLaunch(pageData);
   }
@@ -3970,7 +3971,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     document.getElementById("heart-today-count").textContent = formatMetric(todayCount);
     document.getElementById("heart-current-stage").textContent = formatMetric(presentation.total >= HEART_FOUNDATION_TOTAL ? 3 : stageIndex + 1) + " / " + formatMetric(3);
     document.getElementById("heart-strength").textContent = formatMetric(presentation.reveal) + "%";
-    document.getElementById("heart-next-review").textContent = presentation.total >= HEART_FOUNDATION_TOTAL ? formatHeartReviewDate(unit.nextReviewAt) : t("heartNotScheduled");
+    document.getElementById("heart-next-review").textContent = presentation.total ? t(presentation.dormant || presentation.unknown ? "heartNeedsReview" : "heartDailyReview") : t("heartNotScheduled");
     document.getElementById("heart-status").textContent = t(presentation.statusKey);
     document.getElementById("heart-status").classList.toggle("is-protected", presentation.protectedPage);
     document.getElementById("heart-status").classList.toggle("is-due", presentation.dormant || presentation.overdueDays > 0);
@@ -3984,7 +3985,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
       }
     });
     book.style.setProperty("--heart-reveal", presentation.reveal + "%");
-    book.classList.toggle("is-dormant", !presentation.protectedPage && (presentation.dormant || presentation.overdueDays > 0));
+    book.classList.toggle("is-dormant", presentation.dormant || presentation.overdueDays > 0);
     book.classList.toggle("is-complete", presentation.total >= HEART_FOUNDATION_TOTAL);
     var startButton = document.getElementById("heart-start-practice");
     var startLabel = startButton && startButton.querySelector("span");
@@ -4483,7 +4484,8 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
           var structured = isStructured33Method(state.memorizationMethod);
           var target = structured ? LINKED_33_TARGET : HEART_FOUNDATION_TOTAL;
           var total = structured ? Math.max(0, Number(summary.page.verseCounts[key]) || 0) : getHeartFoundationTotal(getHeartUnit(key));
-          var reveal = summary.permanent ? 1 : Math.min(1, .065 + .935 * total / target);
+          var freshness = getHeartFreshness(key, total, target);
+          var reveal = .065 + .935 * freshness.reveal;
           var glyphButton = document.createElement("button");
           glyphButton.type = "button";
           glyphButton.className = "mushaf-glyph heart-mushaf-glyph" + (word.char_type_name === "end" ? " is-ayah-end" : "") + (total >= target ? " is-heart-collected" : "") + (summary.permanent ? " is-heart-sealed" : "");
@@ -9669,11 +9671,30 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
         stopVerseAudio(false);
       },
       stamp: function () { return window.AllimStorage.stamp(); },
-      saveReview: async function (key, add, stamp) {
-        await window.AllimStorage.mutateMany([add
-          ? { kind: "review_item", id: key, action: "set", value: { position: -Date.now() } }
-          : { kind: "review_item", id: key, action: "delete" }], stamp);
+      saveReview: async function (key, add, stamp, clean, remove) {
+        var intents = [];
+        if (add) intents.push({ kind: "review_item", id: key, action: "set", value: { position: -Date.now() } });
+        if (remove) intents.push({ kind: "review_item", id: key, action: "delete" });
+        if (clean) intents.push({kind: "heart_review", id: crypto.randomUUID(), value: {verse_key: key, recorded_at: new Date().toISOString(), local_date: window.AllimHeartReview.localDay(), evidence: "self_reported"}});
+        await window.AllimStorage.mutateMany(intents, stamp);
         await personalBridge.refresh();
+      }
+    });
+    window.AllimDailyPractice.mount({
+      state: function () { return state; },
+      catalogue: function () { return window.AllimAccountUI.catalogue; },
+      reference: function (key) { var item = getVerseByKey(key); return item ? getVerseLabel({id:item.surahId,names:item.names}, {ayah:item.ayah}) : key; },
+      open: async function (value, page) {
+        cancelStructuredAdvance(); stopMemoryRecognition(true); stopRecognitionImmediately(); stopVerseAudio(false);
+        if (page) {
+          navigate("read"); selectReaderMode("mushaf"); setStudioMode(false); setMushafMode(true);
+          await loadMushafPage(value, true);
+        } else {
+          var parts = value.split(":");
+          if (!await selectVerseByReference(Number(parts[0]), Number(parts[1]), {navigate:false})) throw Error("verse_unavailable");
+          navigate("memorize");
+          if (quietRecall) quietRecall.openCurrent(document.getElementById("heart-start-practice"));
+        }
       }
     });
     if (contribution) contribution.mount();

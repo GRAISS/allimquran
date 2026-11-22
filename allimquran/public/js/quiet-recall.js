@@ -81,9 +81,9 @@
       node("status").textContent = key ? tr(key) : "";
     }
 
-    function open(button) {
+    function open(button, returnFocus = button) {
       if (dialog.open) return;
-      opener = button;
+      opener = returnFocus;
       const mode = button.dataset.quietRecallOpen;
       const available = mode === "queue" ? bridge.queue().slice(0, 5) : bridge.passage();
       session = { mode, available, stamp: bridge.stamp(), keys: [], index: 0, totals: { cleanTotal: 0, assistedTotal: 0, againTotal: 0, skippedTotal: 0 } };
@@ -176,12 +176,12 @@
       const key = current.keys[current.index];
       const shouldAdd = again && !bridge.queue().includes(key);
       const shouldRemove = !again && !current.hint && current.mode === "queue" && bridge.queue().includes(key);
-      if (shouldAdd || shouldRemove) {
+      if (shouldAdd || shouldRemove || !again && !current.hint) {
         current.busy = true;
         setStatus("saving");
         renderCard();
         try {
-          await bridge.saveReview(key, shouldAdd, current.stamp);
+          await bridge.saveReview(key, shouldAdd, current.stamp, !again && !current.hint, shouldRemove);
         } catch (_) {
           if (session !== current || !dialog.open) return;
           current.busy = false;
@@ -231,7 +231,7 @@
       }
       opener = null;
     });
-    return { refresh, close: () => { if (dialog.open) dialog.close(); } };
+    return { refresh, openCurrent: focus => open(Array.from(openers).find(button => button.dataset.quietRecallOpen === "current"), focus), close: () => { if (dialog.open) dialog.close(); } };
   }
 
   root.AllimQuietRecall = { mount };

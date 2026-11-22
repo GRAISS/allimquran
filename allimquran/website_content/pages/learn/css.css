@@ -1040,7 +1040,6 @@ body.mushaf-view .mushaf-page { position: relative; z-index: 2; display: grid; m
 .heart-page-plan blockquote { position: relative; z-index: 1; margin: 19px 0 0; color: #8a672d; font-family: "SF Arabic","Geeza Pro",serif; font-size: clamp(20px,2vw,27px); line-height: 1.65; text-align: center; }
 .heart-ayah-reference { position: relative; z-index: 1; padding-bottom: 14px; border-bottom: 1px solid rgba(139,104,45,.18); color: var(--ink-soft); font-size: 10px; font-weight: 780; text-align: end; }
 .heart-ayah-ink { position: relative; z-index: 1; align-self: center; margin: 18px 0; background: linear-gradient(to left,var(--forest) 0,var(--forest) var(--heart-reveal),#d8dcd7 var(--heart-reveal),#d8dcd7 100%); background-clip: text; -webkit-background-clip: text; color: transparent; font-family: "SF Arabic","Geeza Pro",serif; font-size: clamp(31px,3.4vw,48px); line-height: 1.85; text-align: center; transition: filter .6s,opacity .6s; }
-.heart-book.is-dormant .heart-ayah-ink { filter: saturate(.42); opacity: .72; }
 .heart-book.is-complete { box-shadow: 0 20px 48px rgba(64,52,30,.18),0 0 0 3px rgba(42,151,113,.07),inset 0 0 0 5px rgba(255,255,255,.3); }
 .heart-page-progress { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; border-top: 1px solid rgba(139,104,45,.18); color: var(--ink-soft); font-size: 10px; }
 .heart-page-progress strong { color: var(--forest); font-family: Georgia,serif; font-size: 17px; font-weight: 500; }
