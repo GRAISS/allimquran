@@ -78,6 +78,12 @@
   function align(expectedWords, transcript, isFinal, options) {
     options = options || {};
     var expected = expectedWords.map(raw), heard = tokens(transcript);
+    // Accept fully spelled letter names only for a complete isolated opening.
+    var opening = expected.length === 1 ? letters(expected[0]) : "";
+    var openings = ["الم", "المص", "كهيعص", "طه", "طسم", "يس", "حم", "عسق"];
+    var names = {ا:["الف","ألف"],ل:["لام"],م:["ميم"],ص:["صاد"],ك:["كاف"],ه:["ها","هاء"],ي:["يا","ياء"],ع:["عين"],ط:["طا","طاء"],س:["سين"],ح:["حا","حاء"],ق:["قاف"]};
+    if (openings.indexOf(opening) >= 0 && heard.length === opening.length && Array.from(opening).every(function (letter, index) { return names[letter].indexOf(letters(heard[index])) >= 0; })) heard = [expected[0]];
+
     // Bound untrusted recognizer output before allocating a quadratic table.
     if (!heard.length || expected.length > 256 || heard.length > 512) {
       return summarize(expected.map(function () { return "pending"; }), 0, false);
