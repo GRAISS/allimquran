@@ -4135,6 +4135,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
   }
 
   function startActiveMemorizationStep() {
+    document.getElementById("hifz-practice-panel").open = true;
     cancelStructuredAdvance();
     if (window.ALLIMJourney && window.ALLIMJourney.isCheck(getVerseKey(currentSurah, currentVerse))) { startMemoryRecognition(false); return; }
     if (!isStructured33Method(state.memorizationMethod)) {
@@ -6422,6 +6423,27 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
   }
 
   function initMushafReadingControls() {
+    var methodPicker = document.getElementById("hifz-method-picker");
+    var methodLabel = document.getElementById("hifz-selected-method");
+    function syncMethodLabel() {
+      var selected = methodPicker.querySelector('[aria-pressed="true"] strong');
+      if (selected) methodLabel.textContent = selected.textContent;
+    }
+    new MutationObserver(syncMethodLabel).observe(methodPicker, {subtree: true, attributes: true, attributeFilter: ["aria-pressed"], childList: true, characterData: true});
+    methodPicker.addEventListener("click", function (event) {
+      if (!event.target.closest("[data-hifz-method]")) return;
+      var panel = methodPicker.closest("details");
+      panel.open = false;
+      panel.querySelector("summary").focus();
+    });
+    syncMethodLabel();
+
+    var settingsDialog = document.getElementById("hifz-settings-dialog");
+    var settingsOpener = document.getElementById("hifz-settings-open");
+    settingsOpener.addEventListener("click", function () { settingsDialog.showModal(); });
+    document.getElementById("hifz-settings-close").addEventListener("click", function () { settingsDialog.close(); });
+    settingsDialog.addEventListener("close", function () { settingsOpener.focus(); });
+
     document.querySelectorAll("[data-mushaf-layout]").forEach(function (button) {
       button.addEventListener("click", function () { changeMushafReadingPreferences(button.getAttribute("data-mushaf-layout"), 0); });
     });
@@ -6443,6 +6465,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
       });
       if (active) document.body.style.setProperty("--mushaf-dock-height", Math.ceil(dock.getBoundingClientRect().height + 12) + "px");
       else document.body.style.removeProperty("--mushaf-dock-height");
+      if (active) fitMushafLines(document.getElementById("mushaf-page"));
     }
     new MutationObserver(syncDock).observe(document.body, {attributes: true, attributeFilter: ["class"]});
     if (window.ResizeObserver) new window.ResizeObserver(syncDock).observe(dock);
@@ -6456,7 +6479,14 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
     if (!container) return;
     if (mushafFitFrame) window.cancelAnimationFrame(mushafFitFrame);
     mushafFitFrame = null;
+    container.style.zoom = "";
+    container.style.removeProperty("width");
+    container.style.removeProperty("height");
     if (applyMushafReadingLayout(container)) return;
+    if (document.body.classList.contains("mushaf-view")) {
+      container.style.width = "660px";
+      container.style.height = "990px";
+    }
     var viewportHeight = window.visualViewport && window.visualViewport.height ? window.visualViewport.height : window.innerHeight;
     var compactViewport = window.innerWidth <= 620;
     var minimumSize = compactViewport ? 9 : 12;
@@ -6476,6 +6506,15 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
           line.style.setProperty("--mushaf-line-font-size", Math.max(minimumSize, Math.floor(baseSize * available / needed)) + "px");
         }
       });
+      if (document.body.classList.contains("mushaf-view")) {
+        var wrap = document.getElementById("ayah-wrap");
+        var dock = document.getElementById("mushaf-reading-dock");
+        var top = wrap.getBoundingClientRect().top;
+        var bottom = Math.min(viewportHeight, dock.getBoundingClientRect().top);
+        var scale = Math.min(1, Math.max(1, bottom - top - 16) / Math.max(990, container.scrollHeight), (wrap.clientWidth - 16) / 660);
+        container.style.zoom = String(scale);
+        wrap.scrollTop = 0;
+      }
       mushafFitFrame = null;
     });
   }
@@ -8728,6 +8767,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
   }
 
   function startMemoryQuranRecognition(consentChecked) {
+    document.getElementById("hifz-practice-panel").open = true;
     if (contribution && !consentChecked) {
       var pendingId = memoryRequestId;
       contribution.beforeStart(function () { if (pendingId === memoryRequestId && memorySeriesActive) startMemoryQuranRecognition(true); });
@@ -8829,6 +8869,7 @@ Object.assign(translations.ar, {"mushafNavigation": "التنقل في المص�
   }
 
   function startMemoryRecognition(internalRestart) {
+    document.getElementById("hifz-practice-panel").open = true;
     if (window.ALLIMJourney && window.ALLIMJourney.isCheckComplete()) return;
     if (memoryStartPending || memoryIsListening || memorySubmitPending) return;
     if (!checkMemoryRecognitionSupport()) return;

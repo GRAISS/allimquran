@@ -43,13 +43,15 @@ const server=http.createServer((req,res)=>{
  await page.locator('#surah-select').selectOption('1');await page.locator('#ayah-select').selectOption('1');
  await page.locator('[data-reader-mode="mushaf"]').last().click();
  await page.waitForSelector('#mushaf-page .mushaf-glyph');
- for(const [width,height] of [[1440,1000],[768,1024],[390,844],[320,568],[844,390]]){
+ for(const [width,height] of [[1440,900],[1280,720],[768,1024],[390,844],[320,568],[844,390]]){
  await page.setViewportSize({width,height});await page.waitForTimeout(120);
  const positions=await page.evaluate(()=>{
  const ids=['recitation-panel','allim-journal-summary','allim-storage-panel'];
  const boxes=ids.map(id=>{const r=document.getElementById(id).getBoundingClientRect();return{id,x:r.x,y:r.y,w:r.width,h:r.height};});
  return{boxes,overflow:document.documentElement.scrollWidth>innerWidth+1,next:document.getElementById('mushaf-next-page').getBoundingClientRect().x,prev:document.getElementById('mushaf-prev-page').getBoundingClientRect().x};});
- assert(!positions.overflow,lang+' '+width+' overflow');if(width>600) assert(positions.next<positions.prev,'next page must be left');
+ assert(!positions.overflow,lang+' '+width+' overflow');
+ const sheet=await page.locator('#mushaf-page').evaluate(e=>{const r=e.getBoundingClientRect();return {top:r.top,bottom:r.bottom,dock:document.getElementById('mushaf-reading-dock').getBoundingClientRect().top}});
+ assert(sheet.top>=0&&sheet.bottom<=sheet.dock+2,JSON.stringify({lang,width,sheet}));if(width>600) assert(positions.next<positions.prev,'next page must be left');
  if(width<=600) assert.equal(await page.locator('#mushaf-next-page').evaluate(el=>getComputedStyle(el).clipPath),'inset(50%)');
  for(let i=0;i<positions.boxes.length;i++)for(let j=i+1;j<positions.boxes.length;j++){
  const a=positions.boxes[i],b=positions.boxes[j];assert(!(a.w&&a.h&&b.w&&b.h&&a.x<b.x+b.w-1&&a.x+a.w>b.x+1&&a.y<b.y+b.h-1&&a.y+a.h>b.y+1),JSON.stringify(positions));}
@@ -113,6 +115,13 @@ const server=http.createServer((req,res)=>{
     assert.equal(await page.locator('.quran-word.is-error').count(),0);
    }
    await page.locator('#start-recognition').click();
+   await page.locator('#ayah-select').selectOption('1');
+   await start();
+   await emit('بسم الله الرحمن الرحيم');
+   await page.waitForFunction(()=>document.getElementById('ayah-select').value==='2');
+   await page.waitForFunction(()=>document.querySelector('#start-recognition').getAttribute('aria-pressed')==='true');
+   await page.locator('#start-recognition').click();
+   console.log('PASS completed recitation automatically advances and resumes listening');
    console.log('PASS silence across four continuous restarts stays non-blocking');
    console.log('PASS actual app: pause, repeated restart, interim stability, completion, skip without credit');
  }

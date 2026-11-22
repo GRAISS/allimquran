@@ -539,48 +539,6 @@
 
         <section class="view" id="view-memorize" data-view-panel="memorize" aria-labelledby="memorize-heading">
           <div class="page-intro hifz-page-intro"><div><span class="kicker" data-i18n="memoryMode">ХИФЗ · СОБИРАНИЕ КОРАНА</span><h2 id="memorize-heading" data-i18n="memorizeTitle">Коран в сердце</h2><p id="memorize-intro" data-i18n="memorizeIntro300">Собирайте текущую страницу аят за аятом: 300 правильных повторений проявляют каждый аят, а связное чтение закрепляет всю страницу.</p></div></div>
-          <section class="memory-journey" id="allim-journey"></section>
-          <section class="hifz-choice-controller" aria-labelledby="hifz-choice-title">
-            <div class="hifz-choice-copy">
-              <span class="kicker" data-i18n="hifzChoiceEyebrow">СПОСОБ ОБУЧЕНИЯ</span>
-              <h3 id="hifz-choice-title" data-i18n="hifzChoiceTitle">Как вы хотите выбирать методику?</h3>
-              <p data-i18n="hifzChoiceIntro">Выбирайте сами или разрешите ALLIM изучать ваши реальные занятия и предлагать персональный план.</p>
-            </div>
-            <div class="hifz-choice-mode" role="group" aria-label="Способ выбора методики" data-i18n-aria="hifzChoiceModeLabel">
-              <button type="button" data-hifz-choice-mode="manual" aria-pressed="true"><svg><use href="#i-target"/></svg><span><strong data-i18n="hifzManualMode">Выбираю сам</strong><small data-i18n="hifzManualModeText">Правила и темп определяете вы</small></span></button>
-              <button type="button" data-hifz-choice-mode="adaptive" aria-pressed="false"><svg><use href="#i-spark"/></svg><span><strong data-i18n="hifzAdaptiveMode">Персональный план</strong><small data-i18n="hifzAdaptiveModeText">ALLIM учится на ваших занятиях</small></span></button>
-            </div>
-          </section>
-          <aside class="hifz-coach-panel" id="hifz-coach-panel" aria-live="polite" hidden>
-            <span class="hifz-coach-icon" aria-hidden="true"><svg><use href="#i-spark"/></svg></span>
-            <div class="hifz-coach-copy"><small data-i18n="hifzCoachEyebrow">ПЕРСОНАЛЬНЫЙ НАСТАВНИК</small><strong id="hifz-coach-status">Собираю учебный профиль</strong><span id="hifz-coach-reason">Первые рекомендации появятся после нескольких реальных занятий.</span></div>
-            <div class="hifz-coach-metrics" aria-label="Сигналы персонального обучения" data-i18n-aria="hifzCoachSignalsLabel">
-              <span><b id="hifz-coach-attempts">0</b><small data-i18n="hifzCoachAttempts">Учебных попыток</small></span>
-              <span><b id="hifz-coach-clean">0%</b><small data-i18n="hifzCoachClean">Без подсказок</small></span>
-            </div>
-          </aside>
-          <div class="hifz-method-picker" id="hifz-method-picker" role="group" aria-label="Выбор методики заучивания" data-i18n-aria="hifzMethodLabel">
-            <button type="button" data-hifz-method="foundation300" aria-pressed="true">
-              <span class="hifz-method-icon"><svg><use href="#i-heart"/></svg></span>
-              <span><small data-i18n="hifzMethodOptionOne">МЕТОДИКА 01</small><strong data-i18n="hifzMethod300Title">300 повторений</strong><b data-i18n="hifzMethod300Text">100 + 100 + 100 для каждого аята</b><em data-hifz-recommendation hidden data-i18n="hifzAiRecommended">Рекомендует ALLIM</em></span>
-              <svg class="hifz-method-check"><use href="#i-check"/></svg>
-            </button>
-            <button type="button" data-hifz-method="linked33" aria-pressed="false">
-              <span class="hifz-method-icon"><svg><use href="#i-link"/></svg></span>
-              <span><small data-i18n="hifzMethodOptionTwo">МЕТОДИКА 02</small><strong data-i18n="hifzMethod33Title">33× с последовательным соединением</strong><b data-i18n="hifzMethod33Text">Аят ×33 → связка ×33 → вся страница ×33</b><em data-hifz-recommendation hidden data-i18n="hifzAiRecommended">Рекомендует ALLIM</em></span>
-              <svg class="hifz-method-check"><use href="#i-check"/></svg>
-            </button>
-            <button type="button" data-hifz-method="turkishWall33" aria-pressed="false">
-              <span class="hifz-method-icon"><svg><use href="#i-layers"/></svg></span>
-              <span><small data-i18n="hifzMethodOptionThree">МЕТОДИКА 03</small><strong data-i18n="hifzMethodTurkishTitle">Турецкая кладка · снизу вверх</strong><b data-i18n="hifzMethodTurkishText">Фундамент ×33 → пропуск → заполнение → стена ×33</b><em data-hifz-recommendation hidden data-i18n="hifzAiRecommended">Рекомендует ALLIM</em></span>
-              <svg class="hifz-method-check"><use href="#i-check"/></svg>
-            </button>
-            <button type="button" data-hifz-method="mauritanianLawh" aria-pressed="false">
-              <span class="hifz-method-icon"><svg><use href="#i-book"/></svg></span>
-              <span><small data-i18n="hifzMethodOptionFour">МЕТОДИКА 04</small><strong data-i18n="hifzMethodLawhTitle">Ляух · рукописная страница</strong><b data-i18n="hifzMethodLawhText">Написать → сверить → читать вслух → воспроизвести</b><em data-hifz-recommendation hidden data-i18n="hifzAiRecommended">Рекомендует АЛЛИМ</em></span>
-              <svg class="hifz-method-check"><use href="#i-check"/></svg>
-            </button>
-          </div>
           <section class="lawh-workspace" id="lawh-workspace" aria-labelledby="lawh-title" hidden>
             <div class="lawh-heading">
               <span class="lawh-heading-icon"><svg><use href="#i-book"/></svg></span>
@@ -635,7 +593,7 @@
             </div>
           </section>
           <section class="heart-mushaf" id="heart-mushaf" aria-labelledby="heart-mushaf-title">
-            <div class="heart-mushaf-head">
+            <div class="heart-mushaf-head"><button class="secondary-button" id="hifz-settings-open" type="button" aria-haspopup="dialog" data-i18n="navSettings">Настройки</button>
               <div class="heart-mushaf-heading">
                 <span class="heart-mushaf-icon"><svg><use href="#i-heart"/></svg></span>
                 <div><span class="kicker" data-i18n="heartEyebrow">КНИГА ХИФЗА</span><h3 id="heart-mushaf-title" data-i18n="heartTitle">Коран в сердце</h3><p data-i18n="heartIntro">Белая страница проявляется правильными повторениями и сохраняется регулярным возвращением.</p></div>
@@ -695,6 +653,7 @@
               </aside>
             </div>
           </section>
+          <details class="hifz-method-disclosure" id="hifz-practice-panel"><summary data-i18n="heartPracticeTitle">Читайте выбранный аят наизусть</summary>
           <div class="memory-section-heading" id="heart-verse-practice">
             <div><span class="kicker" data-i18n="heartPracticeEyebrow">ТРЕНИРОВКА АЯТА</span><h3 id="heart-practice-title" data-i18n="heartPracticeTitle">Читайте выбранный аят наизусть</h3><p id="heart-practice-intro" data-i18n="heartPracticeIntro">Слова открываются только по порядку. Полное правильное чтение без подсказки добавляет одно повторение к правилу 300.</p></div>
           </div>
@@ -750,6 +709,7 @@
             </div>
             <button class="text-button" id="reset-memory" type="button"><svg><use href="#i-reset"/></svg><span data-i18n="startAgain">Начать заново</span></button>
           </div>
+          </details>
           <section class="page-recall-card is-access-checking" id="page-recall-card" aria-labelledby="page-recall-title" data-access-level="checking">
             <div class="page-recall-card-icon"><svg><use href="#i-brain"/></svg><span>02</span></div>
             <div class="page-recall-card-copy">
@@ -1160,3 +1120,51 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div></div>
 <div id="mushaf-reading-dock"></div>
+
+<dialog id="hifz-settings-dialog" aria-labelledby="hifz-settings-title"><div class="dialog-heading"><h2 id="hifz-settings-title" data-i18n="navSettings">Настройки</h2><button class="icon-button" id="hifz-settings-close" type="button" data-i18n-aria="close" aria-label="Закрыть">×</button></div><div class="hifz-settings-body">          <div class="hifz-tools">
+          <details class="hifz-plan-drawer"><summary data-i18n="hifzAdaptiveMode">Персональный план</summary><section class="memory-journey" id="allim-journey"></section></details>
+          </div>
+          <details class="hifz-method-disclosure"><summary><span data-i18n="hifzMethodLabel">Выбор методики заучивания</span><span id="hifz-selected-method"></span></summary>
+          <section class="hifz-choice-controller" aria-labelledby="hifz-choice-title">
+            <div class="hifz-choice-copy">
+              <span class="kicker" data-i18n="hifzChoiceEyebrow">СПОСОБ ОБУЧЕНИЯ</span>
+              <h3 id="hifz-choice-title" data-i18n="hifzChoiceTitle">Как вы хотите выбирать методику?</h3>
+              <p data-i18n="hifzChoiceIntro">Выбирайте сами или разрешите ALLIM изучать ваши реальные занятия и предлагать персональный план.</p>
+            </div>
+            <div class="hifz-choice-mode" role="group" aria-label="Способ выбора методики" data-i18n-aria="hifzChoiceModeLabel">
+              <button type="button" data-hifz-choice-mode="manual" aria-pressed="true"><svg><use href="#i-target"/></svg><span><strong data-i18n="hifzManualMode">Выбираю сам</strong><small data-i18n="hifzManualModeText">Правила и темп определяете вы</small></span></button>
+              <button type="button" data-hifz-choice-mode="adaptive" aria-pressed="false"><svg><use href="#i-spark"/></svg><span><strong data-i18n="hifzAdaptiveMode">Персональный план</strong><small data-i18n="hifzAdaptiveModeText">ALLIM учится на ваших занятиях</small></span></button>
+            </div>
+          </section>
+          <aside class="hifz-coach-panel" id="hifz-coach-panel" aria-live="polite" hidden>
+            <span class="hifz-coach-icon" aria-hidden="true"><svg><use href="#i-spark"/></svg></span>
+            <div class="hifz-coach-copy"><small data-i18n="hifzCoachEyebrow">ПЕРСОНАЛЬНЫЙ НАСТАВНИК</small><strong id="hifz-coach-status">Собираю учебный профиль</strong><span id="hifz-coach-reason">Первые рекомендации появятся после нескольких реальных занятий.</span></div>
+            <div class="hifz-coach-metrics" aria-label="Сигналы персонального обучения" data-i18n-aria="hifzCoachSignalsLabel">
+              <span><b id="hifz-coach-attempts">0</b><small data-i18n="hifzCoachAttempts">Учебных попыток</small></span>
+              <span><b id="hifz-coach-clean">0%</b><small data-i18n="hifzCoachClean">Без подсказок</small></span>
+            </div>
+          </aside>
+          <div class="hifz-method-picker" id="hifz-method-picker" role="group" aria-label="Выбор методики заучивания" data-i18n-aria="hifzMethodLabel">
+            <button type="button" data-hifz-method="foundation300" aria-pressed="true">
+              <span class="hifz-method-icon"><svg><use href="#i-heart"/></svg></span>
+              <span><small data-i18n="hifzMethodOptionOne">МЕТОДИКА 01</small><strong data-i18n="hifzMethod300Title">300 повторений</strong><b data-i18n="hifzMethod300Text">100 + 100 + 100 для каждого аята</b><em data-hifz-recommendation hidden data-i18n="hifzAiRecommended">Рекомендует ALLIM</em></span>
+              <svg class="hifz-method-check"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" data-hifz-method="linked33" aria-pressed="false">
+              <span class="hifz-method-icon"><svg><use href="#i-link"/></svg></span>
+              <span><small data-i18n="hifzMethodOptionTwo">МЕТОДИКА 02</small><strong data-i18n="hifzMethod33Title">33× с последовательным соединением</strong><b data-i18n="hifzMethod33Text">Аят ×33 → связка ×33 → вся страница ×33</b><em data-hifz-recommendation hidden data-i18n="hifzAiRecommended">Рекомендует ALLIM</em></span>
+              <svg class="hifz-method-check"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" data-hifz-method="turkishWall33" aria-pressed="false">
+              <span class="hifz-method-icon"><svg><use href="#i-layers"/></svg></span>
+              <span><small data-i18n="hifzMethodOptionThree">МЕТОДИКА 03</small><strong data-i18n="hifzMethodTurkishTitle">Турецкая кладка · снизу вверх</strong><b data-i18n="hifzMethodTurkishText">Фундамент ×33 → пропуск → заполнение → стена ×33</b><em data-hifz-recommendation hidden data-i18n="hifzAiRecommended">Рекомендует ALLIM</em></span>
+              <svg class="hifz-method-check"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" data-hifz-method="mauritanianLawh" aria-pressed="false">
+              <span class="hifz-method-icon"><svg><use href="#i-book"/></svg></span>
+              <span><small data-i18n="hifzMethodOptionFour">МЕТОДИКА 04</small><strong data-i18n="hifzMethodLawhTitle">Ляух · рукописная страница</strong><b data-i18n="hifzMethodLawhText">Написать → сверить → читать вслух → воспроизвести</b><em data-hifz-recommendation hidden data-i18n="hifzAiRecommended">Рекомендует АЛЛИМ</em></span>
+              <svg class="hifz-method-check"><use href="#i-check"/></svg>
+            </button>
+          </div>
+          </details>
+</div></dialog>
