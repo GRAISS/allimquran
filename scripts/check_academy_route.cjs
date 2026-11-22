@@ -25,6 +25,10 @@ const server=http.createServer((req,res)=>{
    await page.setViewportSize({width,height:900});
    assert(await page.locator('#academy-entry-card').isHidden(),'entry funnel must not dominate dashboard');
    assert(await page.locator('.today-plan-card').isVisible());
+   assert(await page.locator('#allim-storage-panel').isHidden());
+   await page.locator('[data-copy="deviceProgress"]').click();
+   assert(await page.locator('#allim-storage-panel details').evaluate(e=>e.open));
+   await page.keyboard.press('Escape');assert(await page.locator('#allim-storage-panel').isHidden());
    if(lang==='ru')await page.screenshot({path:'/tmp/allim-academy-'+width+'.png'});
    await page.locator('#open-academy-route').click();
    assert(await page.locator('#academy-entry-card').isVisible());
