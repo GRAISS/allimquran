@@ -1,0 +1,14 @@
+{% extends "templates/web.html" %}
+{% block title %}{{ trial_copy.title }} · ALLIM{% endblock %}
+{% block style %}<link rel="stylesheet" href="/assets/allimquran/css/trial-lesson.css">{% endblock %}
+{% block page_content %}
+<main class="trial-page" id="trial-page" lang="{{ trial_lang }}" dir="{{ 'rtl' if trial_lang == 'ar' else 'ltr' }}">
+  <nav class="trial-nav" aria-label="ALLIM"><a href="/academy">{{ trial_copy.academy }}</a><div class="trial-languages"><a href="?lang=en" lang="en">EN</a><a href="?lang=ar" lang="ar">العربية</a><a href="?lang=ru" lang="ru">RU</a></div></nav>
+  <header class="trial-heading"><p class="trial-brand">ALLIM ACADEMY</p><h1>{{ trial_copy.title }}</h1><p>{{ trial_copy.intro }}</p></header>
+  <ol class="trial-steps">{% for step in trial_copy.steps %}<li>{{ step }}</li>{% endfor %}</ol>
+  <section id="trial-content" aria-live="polite" aria-busy="true"><p>{{ trial_copy.loading }}</p></section>
+  <aside class="trial-preparation"><h2>{{ trial_copy.preparation }}</h2><p>{{ trial_copy.prepare }}</p></aside>
+  <noscript><p>{{ trial_copy.guest }}</p><a href="/login?redirect-to=%2Fmy-trial-lesson">{{ trial_copy.signin }}</a></noscript>
+</main>
+{% endblock %}
+{% block script %}<script src="/assets/allimquran/js/trial-lesson.js" defer></script>{% endblock %}

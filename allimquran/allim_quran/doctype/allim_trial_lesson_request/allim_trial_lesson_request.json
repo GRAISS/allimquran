@@ -969,7 +969,7 @@
       "search_index": 0,
       "not_nullable": 0,
       "mask": 0,
-      "options": "New\nContacted\nScheduled\nEnrolled\nClosed",
+      "options": "New\nContacted\nScheduled\nReschedule\nNo Show\nCompleted\nEnrolled\nClosed",
       "sort_options": 0,
       "show_dashboard": 0,
       "link_filters": null,
@@ -1020,6 +1020,98 @@
       "oldfieldtype": null,
       "show_description_on_click": 0,
       "doctype": "DocField"
+    },
+    {
+      "fieldname": "trial_handling",
+      "label": "Trial lesson handling",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "trial_coordinator",
+      "label": "Trial coordinator",
+      "fieldtype": "Link",
+      "options": "User",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "trial_follow_up",
+      "label": "Next follow-up deadline",
+      "fieldtype": "Datetime",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "trial_teacher",
+      "label": "Trial teacher",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "trial_start",
+      "label": "Lesson start (site time zone)",
+      "fieldtype": "Datetime"
+    },
+    {
+      "fieldname": "trial_timezone",
+      "label": "Learner time zone",
+      "fieldtype": "Data",
+      "description": "IANA time zone, for example Europe/Moscow or Asia/Riyadh."
+    },
+    {
+      "fieldname": "trial_duration",
+      "label": "Duration in minutes",
+      "fieldtype": "Int",
+      "default": "30"
+    },
+    {
+      "fieldname": "trial_meeting_url",
+      "label": "Meeting link",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "trial_reason",
+      "label": "Internal reason / follow-up notes",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "trial_outcome",
+      "label": "Trial lesson result",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "trial_completed_at",
+      "label": "Actual completion time",
+      "fieldtype": "Datetime"
+    },
+    {
+      "fieldname": "trial_result",
+      "label": "What we assessed",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "trial_recommendation",
+      "label": "Recommended learning plan",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "trial_next_step",
+      "label": "Next step for the learner",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "trial_learner",
+      "label": "Applicant account",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "trial_version",
+      "label": "Notification revision",
+      "fieldtype": "Int",
+      "read_only": 1,
+      "hidden": 1
     }
   ],
   "permissions": [
@@ -1065,6 +1157,22 @@
     "language",
     "source",
     "consent",
-    "status"
+    "status",
+    "trial_handling",
+    "trial_coordinator",
+    "trial_follow_up",
+    "trial_teacher",
+    "trial_start",
+    "trial_timezone",
+    "trial_duration",
+    "trial_meeting_url",
+    "trial_reason",
+    "trial_outcome",
+    "trial_completed_at",
+    "trial_result",
+    "trial_recommendation",
+    "trial_next_step",
+    "trial_learner",
+    "trial_version"
   ]
 }

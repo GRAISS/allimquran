@@ -7,12 +7,13 @@ app_license = "mit"
 required_apps = ["lms"]
 
 after_install = "allimquran.setup.after_install"
-before_migrate = "allimquran.setup.preflight"
+before_migrate = ["allimquran.setup.preflight", "allimquran.trial_setup.preflight"]
 after_migrate = [
 	"allimquran.setup.sync",
 	"allimquran.search_intelligence.after_migrate",
 	"allimquran.review_portal.ensure_role",
 	"allimquran.account_storage.install",
+	"allimquran.trial_setup.install",
 ]
 
 before_request = ["allimquran.session_security.before_request"]
@@ -21,6 +22,7 @@ doc_events = {"User": {"on_trash": "allimquran.account_storage.delete_user_progr
 
 # ALLIM SEARCH INTELLIGENCE START
 scheduler_events = {
+	"cron": {"*/5 * * * *": ["allimquran.trial_lifecycle.tick"]},
 	"hourly": ["allimquran.account_storage.cleanup"],
 	"daily_long": ["allimquran.search_intelligence.run_scheduled_audit"],
 }

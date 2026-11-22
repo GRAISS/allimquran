@@ -10,3 +10,11 @@ class ALLIMTrialLessonRequest(Document):
 		for field, value in current_contact().items():
 			if not self.get(field) and value:
 				self.set(field, value)
+
+	def validate(self):
+		from allimquran.trial_lifecycle import validate
+		validate(self)
+
+	def on_update(self):
+		from allimquran.trial_lifecycle import on_update
+		on_update(self)

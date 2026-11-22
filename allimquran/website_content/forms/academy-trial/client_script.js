@@ -19,7 +19,7 @@ window.setTimeout(apply_allim_diagnostic_context, 0);
 function apply_allim_return_action() {
   var link = document.querySelector('.success-footer .success_url_message a');
   if (!link) return;
-  link.textContent = "Back to Academy";
+  link.textContent = "My trial lesson";
   link.classList.add('allim-return-button');
 }
 var allim_previous_after_load = frappe.web_form.after_load;

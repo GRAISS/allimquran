@@ -1,0 +1,44 @@
+{
+  "doctype": "DocType",
+  "name": "ALLIM Trial Settings",
+  "module": "ALLIM Quran",
+  "custom": 0,
+  "issingle": 1,
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "coordinator",
+      "label": "Default trial coordinator",
+      "fieldtype": "Link",
+      "options": "User"
+    },
+    {
+      "fieldname": "response_hours",
+      "label": "First contact deadline in hours",
+      "fieldtype": "Int",
+      "default": "24"
+    },
+    {
+      "fieldname": "email_enabled",
+      "label": "Enable learner and teacher email",
+      "fieldtype": "Check",
+      "default": "0",
+      "description": "Enable only after testing the outgoing email account. Staff notification preferences apply separately."
+    }
+  ],
+  "field_order": [
+    "coordinator",
+    "response_hours",
+    "email_enabled"
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "report": 1
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "doctype": "DocType",
+  "name": "ALLIM Trial Notice",
+  "module": "ALLIM Quran",
+  "custom": 0,
+  "issingle": 0,
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "trial_request",
+      "label": "Trial request",
+      "fieldtype": "Link",
+      "options": "ALLIM Trial Lesson Request",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "kind",
+      "label": "Event",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "audience",
+      "label": "Audience",
+      "fieldtype": "Select",
+      "options": "Staff\nTeacher\nLearner",
+      "reqd": 1
+    },
+    {
+      "fieldname": "recipient",
+      "label": "Recipient",
+      "fieldtype": "Data",
+      "reqd": 1
+    },
+    {
+      "fieldname": "version",
+      "label": "Revision",
+      "fieldtype": "Int"
+    },
+    {
+      "fieldname": "state",
+      "label": "Delivery state",
+      "fieldtype": "Select",
+      "options": "Pending\nQueued\nNotified\nSuperseded\nSuppressed",
+      "default": "Pending",
+      "in_list_view": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "last_error",
+      "label": "Last delivery error",
+      "fieldtype": "Small Text",
+      "read_only": 1
+    }
+  ],
+  "field_order": [
+    "trial_request",
+    "kind",
+    "audience",
+    "recipient",
+    "version",
+    "state",
+    "last_error"
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 0,
+      "report": 1
+    }
+  ]
+}

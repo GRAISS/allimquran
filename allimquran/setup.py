@@ -128,4 +128,7 @@ def after_install():
 	from allimquran.account_storage import install
 
 	install()
+	from allimquran.trial_setup import install as install_trials
+
+	install_trials()
 	return result
